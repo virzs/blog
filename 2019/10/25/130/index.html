@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Vir">
+  <meta name="keywords" content="">
+  
+  <title>H5前端面试题 - Vir的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"virs.github.io","root":"/blog/","version":"1.8.9a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/">&nbsp;<strong>Vir的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="H5前端面试题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Vir
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-10-25 10:13" pubdate>
+        2019年10月25日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">H5前端面试题</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：10 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p><strong>HTML5/CSS3</strong></p>
+<p>左中右3个DIV，如何让中间的DIV先显示出来？</p>
+<p>浏览器的兼容问题你如何解决。</p>
+<ul>
+<li>  Webkit前缀</li>
+<li>  hack</li>
+</ul>
+<p>Position属性的值有哪些？怎样使用？</p>
+<ul>
+<li>  relative 相对定位，相对定位不脱离文档流，参考其在原来文档流中的位置，通过 top,bottom,left,right 定位，并 且可以通过z-index进行层次分级。</li>
+<li>  absolute 绝对定位，绝对定位脱离文档流，依据最近的已经定位（绝对、相对或固定定位）的父元素，通过 top,bottom,left,right 定位。当父级 position 为 static 时，absolute元素将依据body根元素（浏览器窗口）进行定 位，可以通过z-index进行层次分级。</li>
+<li>  fixed 固定定位，固定定位与父元素无关（无论父元素是否定位），直接根据浏览器窗口定位，且不随滚动条拖动 页面而滚动，可通过z-index进行层次分级。</li>
+</ul>
+<p>Doctype有什么作用？严格模式与混杂模式有什么区别？</p>
+<ul>
+<li>  <!DOCTYPE>声明叫做文件类型定义（DTD），声明的作用为了告诉浏览器该文件的类型。让浏览器解析器知道应该用哪个规范来解析文档。&lt;!DOCTYPE&gt;声明必须在 HTML 文档的第一行，这并不是一个 HTML 标签。</li>
+<li><strong>严格模式：</strong>又称标准模式，是指浏览器按照 W3C 标准解析代码<br>  <strong>混杂模式：</strong>又称怪异模式或兼容模式，是指浏览器用自己的方式解析代码。</li>
+</ul>
+<p>常用浏览器的内核有哪些？</p>
+<ul>
+<li>  <strong>360浏览器：Chrome内核和IE内核</strong></li>
+<li>  <strong>百度浏览器：IE和Webkit双内核。、</strong></li>
+<li>  <strong>QQ浏览器：Chromium内核+IE双内核</strong></li>
+<li>  <strong>猎豹浏览器：Trident和WebKit。</strong></li>
+<li>  <strong>搜狗浏览器：chromium内核</strong></li>
+</ul>
+<p>什么是CSS Hack，作用是什么？</p>
+<ul>
+<li>  <strong>CSS hack是通过在</strong><a target="_blank" rel="noopener" href="http://www.w3cschool.cn/codecamp/style-the-html-body-element.html"><strong>CSS样式</strong></a><strong>中加入一些特殊的符号，让不同的浏览器识别不同的符号（什么样的浏览器识别什么样的符号是有标准的，CSS hack就是让你记住这个标准），以达到应用不同的</strong><a target="_blank" rel="noopener" href="http://www.w3cschool.cn/css"><strong>CSS</strong></a><strong>样式的目的。</strong></li>
+<li>  <strong>属性级Hack：比如IE6能识别下划线“_”和星号“*”，IE7能识别星号“*”，但不能识别下划线”_ ”，而firefox两个都不能认识。</strong></li>
+</ul>
+<p>对W3C标准有哪些认识和理解</p>
+<p>XHTML和HTML有何不同？</p>
+<p><strong>在书写方面**</strong>:<br>1.XHTML** <strong>元素必须被正确地嵌套。****2.XHTML</strong> <strong>元素必须被关闭。标签名必须用小写字母。****3.XHTML</strong> <strong>文档必须拥有根元素。**</strong><br>4.XHTML<strong><strong>标签必须成双成对</strong></strong><br>5.html<strong><strong>对标签顺序要求不严格，</strong></strong>XHTML<strong><strong>标签顺序必须正确</strong></strong>总而言之<strong><strong>xhtml</strong></strong>比<strong><strong>html</strong></strong>更加规范**</p>
+<p>知道哪些浏览器的兼容性问题？如何解决？</p>
+<p><strong>不同浏览器的标签默认的外补丁和内补丁不同</strong></p>
+<p> <strong>*{margin:0;padding:0}</strong></p>
+<p>什么是语义化的HTML?</p>
+<ul>
+<li>   用最恰当的标签来标记内容。</li>
+</ul>
+<p>HTML5为什么只需要写<!DOCTYPE html>就可以了？</p>
+<ul>
+<li>  <!DOCTYPE>声明位于位于HTML文档中的第一行，处于 <html> 标签之前。作用：告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以怪异模式呈现。</li>
+</ul>
+<p>HTML5有哪些新特性？移除了哪些元素？如何处理新标签的浏览器兼容性问题？如何区分HTML和HTML5?</p>
+<ul>
+<li>  用于媒介回放的 video 和 audio 元素;</li>
+<li>  本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;</li>
+<li>  sessionStorage 的数据在浏览器关闭后自动删除;</li>
+<li>  语意化更好的内容元素，比如 article、footer、header、nav、section;</li>
+<li>  表单控件，calendar、date、time、email、url、search;</li>
+<li>  新的技术webworker, websockt, Geolocation;</li>
+</ul>
+<p>页面编码和被请求的资源编码如果不一致如何处理？</p>
+<ul>
+<li>  对于ajax请求传递的参数，如果是get请求方式，参数如果传递中文，在有些浏览器会乱码，不同的浏览器对参数编码的处理方式不同，所以对于get请求的参数需要使用 encodeURIComponent函数对参数进行编码处理，后台开发语言都有相应的解码api。对于post请求不需要进行编码</li>
+</ul>
+<p>不用媒体查询和盒子布局，如何实现自适应？</p>
+<ul>
+<li>  弹性布局：flex; grid 布局；</li>
+</ul>
+<p>常见表单元素有哪些？HTML5提供了哪些新的表单元素？</p>
+<ul>
+<li>  Text, radio, submit, textarea, file,</li>
+</ul>
+<p>SVG图片和普通图片有何不同？有什么优势？</p>
+<p>如何实现垂直居中？</p>
+<p>什么是FOUC?如何解决？</p>
+<ul>
+<li>  如果使用import方法对<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=CSS&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">CSS</a>进行导入,会导致某些页面在Windows 下的Internet Explorer出现一些奇怪的现象:以无样式显示页面内容的瞬间闪烁,这种现象称之为文档样式短暂失效(Flash of Unstyled Content),简称为FOUC.原因大致为： 1，使用import方法导入样式表。 2，将样式表放在页面底部 3，有几个样式表，放在html结构的不同位置。其实原理很清楚：当样式表晚于 结构性html 加载，当加载到此样式表时，页面将停止之前的渲染。此样式表被下载和解析后，将重新渲染页面，也就出现了短暂 的 花屏现象。解决方法：使用<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=LINK&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">LINK</a>标签将样式表放在文档<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=HEAD&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">HEAD</a>中更多</li>
+</ul>
+<p>什么是DIV高度塌陷？，如何解决？</p>
+<ul>
+<li><p>  父元素在文档流中高度默认是被子元素撑开的，当子元素脱离文档流以后，将无法撑起父元素的高度，也就会导致父元素的高度塌陷。</p>
+</li>
+<li><p>  使用after伪类</p>
+</li>
+<li><p>  设置overflow为一个非默认值，一般都是使用overflow:hidden来开启BFC</p>
+</li>
+</ul>
+<p>开启BFC以后元素将会具有如下特性：</p>
+<ul>
+<li>  2.1 父元素的垂直外边距不会与子元素重叠</li>
+<li>  2.2. 开启BFC的元素不会被浮动元素所覆盖</li>
+<li>  2.3 开启BFC的元素可以包含浮动子元素</li>
+</ul>
+<p>两个a标签之间为何有空白？如何解决？</p>
+<ul>
+<li>  a标签默认是行内元素，而行内元素之间的回车键、多个空格、多个制表符（tab）等均会按一个空格来处理，这样的话，如果相邻的两个a标签不在同一行（换句话说它们之间有回车换行符），则显示在页面的时候它们之间就会出现一个空格的间隙。</li>
+</ul>
+<p>如何实现响应式布局？</p>
+<ul>
+<li>  媒体查询 盒子布局 flex弹性布局 grid 布局</li>
+</ul>
+<p>如何让div居中？如何居中一个浮动元素？如何让绝对定位的元素居中？</p>
+<ul>
+<li><p>  div居中的方式:text-algin:center/margin:0 auto;</p>
+</li>
+<li><p>  浮动元素居中的方式:position:relative</p>
+</li>
+<li><p>  让绝对定位的元素居中: left: 0;</p>
+</li>
+<li><p>              right: 0;</p>
+</li>
+<li><p>              top: 0;</p>
+</li>
+<li><p>              bottom: 0;</p>
+</li>
+<li><p>              margin: auto;</p>
+</li>
+</ul>
+<p>怎样清除浮动？</p>
+<ul>
+<li>  1.clear:both 2.父级overflow:hidden 3.父级伪元素after：{content:””,clear:both;display:block}</li>
+</ul>
+<p>如何实现中间div宽度固定，两端div自适应宽度？说出2种方法</p>
+<ul>
+<li>  双飞翼（自适应加个父级容器，应用margin），圣杯（不加容器,padding）</li>
+</ul>
+<p>Background是否包含border？</p>
+<p>CSS3的变形有哪些类型？</p>
+<ul>
+<li>  Rotale,scale,skew,translate</li>
+</ul>
+<p>说明CSS3动画(@keyframes,animation)和过渡(transition)的区别？</p>
+<ul>
+<li>  1）动画不需要事件触发，过渡需要。</li>
+<li>  2）过渡只有一组（两个：开始-结束） 关键帧，动画可以设置多个</li>
+</ul>
+<p>CSS定位有哪些类型？说明一下具体的应用场合</p>
+<ul>
+<li>  relative,自身为原点</li>
+<li>  absolute,浏览器窗口原点为原点</li>
+<li>  fixed，不随滚动条拖动 页面而滚动</li>
+</ul>
+<p>优雅降级和渐进增强是什么意思？</p>
+<ul>
+<li><p>  渐进增强 progressive enhancement：针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。</p>
+</li>
+<li><p>  优雅降级 graceful degradation：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。</p>
+</li>
+<li><p>  区别：优雅降级是从复杂的现状开始，并试图减少用户体验的供给，而渐进增强则是从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要。降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带。</p>
+</li>
+</ul>
+<p>display样式值有哪些？有啥作用</p>
+<ul>
+<li>  none,block,inline,inline-block</li>
+</ul>
+<p>如何在sass中定义一个变量</p>
+<ul>
+<li>  声明变量的符号“$”</li>
+</ul>
+<p>什么是弹性布局？</p>
+<p>CSS的优先级如何定义</p>
+<ul>
+<li>  行内样式&gt;内部样式&gt;外部样式&gt;默认样式&gt;继承样式</li>
+</ul>
+<p>描述一下盒子模型</p>
+<ul>
+<li>  W3c和IE两种：都由content,  padding，border, margin构成</li>
+<li>  box-sizing:content-box/border-box</li>
+</ul>
+<p>什么是outline属性，有什么作用？</p>
+<ul>
+<li>  outline （轮廓）是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用</li>
+</ul>
+<p>Position属性有哪些值？分别用在什么场景？</p>
+<p>隐藏一个界面元素的方式你能想到哪些？分别有什么区别</p>
+<ul>
+<li>  display:none</li>
+<li>  该方式让元素隐藏时，隐藏的元素不占空间，隐藏后将改变html原有样式。一旦父节点元素应用了display:none，父节点及其子孙节点元素全部不可见，而且无论其子孙元素如何不屈地挣扎都无济于事。</li>
+<li>      2. visibility:hidden</li>
+<li>      该方式让元素隐藏时，隐藏的元素还是占用原有位置，隐藏后不将改变html原有样式。但，如果该元素的子元素使用了visibility:visible的话，改子元素将不被隐藏。</li>
+<li>      3. opacity:0</li>
+<li>       该方式让元素隐藏时，隐藏的元素还是占用原有位置，隐藏后不将改变html原有样式。但，隐藏的元素所对应的事件，仍然可以触发。display属性不会出现过渡 即使添加了transition,opacity属性适合有过渡的元素使用.</li>
+</ul>
+<p>对于web前端适配多端的模式，你有什么解决方案？</p>
+<ul>
+<li>  适配多端 = 响应式设计页面</li>
+</ul>
+<p>A，button和input点击出现蓝色边框，如何去掉？</p>
+<ul>
+<li><p>  outline: none;</p>
+</li>
+<li><p>  父元素 height：auto，子元素使用了浮动样式，编码使用伪元素清除浮动</p>
+</li>
+<li><p>  .clearfix::after{</p>
+</li>
+<li><p>              content: “”;</p>
+</li>
+<li><p>              display: block;</p>
+</li>
+<li><p>              clear: both;</p>
+</li>
+<li><p>          }</p>
+</li>
+</ul>
+<p>父子div中，子div宽度不定，编码实现子元素在父元素中水平居中</p>
+<ul>
+<li>  弹性布局</li>
+<li>    display: flex;</li>
+<li>  align-items: center; /* 垂直居中 */<br>  justify-content: center; /* 水平居中 */</li>
+</ul>
+<p>写出适配移动端的meta代码</p>
+<ul>
+<li>  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/HTML5/">HTML5</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2019/11/19/134/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git常用命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2019/03/23/111/">
+                        <span class="hidden-mobile">30个高质量免费电子书下载网站</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/blog/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        豫ICP备18039751号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/debouncer.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/blog/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

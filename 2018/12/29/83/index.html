@@ -1,0 +1,652 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Vir">
+  <meta name="keywords" content="">
+  
+  <title>JavaScript数据类型和变量 - Vir的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"virs.github.io","root":"/blog/","version":"1.8.9a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/">&nbsp;<strong>Vir的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript数据类型和变量">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Vir
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-12-29 17:25" pubdate>
+        2018年12月29日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript数据类型和变量</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：10 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>计算机顾名思义就是可以做数学计算的机器，因此，计算机程序理所当然地可以处理各种数值。但是，计算机能处理的远不止数值，还可以处理文本、图形、音频、视频、网页等各种各样的数据，不同的数据，需要定义不同的数据类型。在JavaScript中定义了以下几种数据类型：</p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>JavaScript不区分整数和浮点数，统一用Number表示，以下都是合法的Number类型：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">123; &#x2F;&#x2F; 整数123
+0.456; &#x2F;&#x2F; 浮点数0.456
+1.2345e3; &#x2F;&#x2F; 科学计数法表示1.2345x1000，等同于1234.5
+-99; &#x2F;&#x2F; 负数
+NaN; &#x2F;&#x2F; NaN表示Not a Number，当无法计算结果时用NaN表示
+Infinity; &#x2F;&#x2F; Infinity表示无限大，当数值超过了JavaScript的Number所能表示的最大值时，就表示为Infinity<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>计算机由于使用二进制，所以，有时候用十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示，例如：<code>0xff00</code>，<code>0xa5b4c3d2</code>，等等，它们和十进制表示的数值完全一样。</p>
+<p>Number可以直接做四则运算，规则和数学一致：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">1 + 2; &#x2F;&#x2F; 3
+(1 + 2) * 5 &#x2F; 2; &#x2F;&#x2F; 7.5
+2 &#x2F; 0; &#x2F;&#x2F; Infinity
+0 &#x2F; 0; &#x2F;&#x2F; NaN
+10 % 3; &#x2F;&#x2F; 1
+10.5 % 3; &#x2F;&#x2F; 1.5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>注意<code>%</code>是求余运算。</p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>字符串是以单引号’或双引号”括起来的任意文本，比如<code>&#39;abc&#39;</code>，<code>&quot;xyz&quot;</code>等等。请注意，<code>&#39;&#39;</code>或<code>&quot;&quot;</code>本身只是一种表示方式，不是字符串的一部分，因此，字符串<code>&#39;abc&#39;</code>只有<code>a</code>，<code>b</code>，<code>c</code>这3个字符。</p>
+<h4 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h4><p>布尔值和布尔代数的表示完全一致，一个布尔值只有<code>true</code>、<code>false</code>两种值，要么是<code>true</code>，要么是<code>false</code>，可以直接用<code>true</code>、<code>false</code>表示布尔值，也可以通过布尔运算计算出来：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">true; &#x2F;&#x2F; 这是一个true值
+false; &#x2F;&#x2F; 这是一个false值
+2 &gt; 1; &#x2F;&#x2F; 这是一个true值
+2 &gt;&#x3D; 3; &#x2F;&#x2F; 这是一个false值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p><code>&amp;&amp;</code>运算是与运算，只有所有都为<code>true</code>，<code>&amp;&amp;</code>运算结果才是<code>true</code>：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">true &amp;&amp; true; &#x2F;&#x2F; 这个&amp;&amp;语句计算结果为true
+true &amp;&amp; false; &#x2F;&#x2F; 这个&amp;&amp;语句计算结果为false
+false &amp;&amp; true &amp;&amp; false; &#x2F;&#x2F; 这个&amp;&amp;语句计算结果为false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>运算是或运算，只要其中有一个为<code>true</code>，运算结果就是<code>true</code>：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">false  false; &#x2F;&#x2F; 这个语句计算结果为false
+true  false; &#x2F;&#x2F; 这个语句计算结果为true
+false  true  false; &#x2F;&#x2F; 这个语句计算结果为true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p><code>!</code>运算是非运算，它是一个单目运算符，把<code>true</code>变成<code>false</code>，<code>false</code>变成<code>true</code>：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">! true; &#x2F;&#x2F; 结果为false
+! false; &#x2F;&#x2F; 结果为true
+! (2 &gt; 5); &#x2F;&#x2F; 结果为true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>布尔值经常用在条件判断中，比如：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">var age &#x3D; 15;
+if (age &gt;&#x3D; 18) &#123;
+    alert(&#39;adult&#39;);
+&#125; else &#123;
+    alert(&#39;teenager&#39;);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><p>当我们对Number做比较时，可以通过比较运算符得到一个布尔值：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">2 &gt; 5; &#x2F;&#x2F; false
+5 &gt;&#x3D; 2; &#x2F;&#x2F; true
+7 &#x3D;&#x3D; 7; &#x2F;&#x2F; true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>实际上，JavaScript允许对任意数据类型做比较：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">false &#x3D;&#x3D; 0; &#x2F;&#x2F; true
+false &#x3D;&#x3D;&#x3D; 0; &#x2F;&#x2F; false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+
+<p>要特别注意相等运算符<code>==</code>。JavaScript在设计时，有两种比较运算符：</p>
+<p>第一种是<code>==</code>比较，它会自动转换数据类型再比较，很多时候，会得到非常诡异的结果；</p>
+<p>第二种是<code>===</code>比较，它不会自动转换数据类型，如果数据类型不一致，返回<code>false</code>，如果一致，再比较。</p>
+<p>由于JavaScript这个设计缺陷，_不要_使用<code>==</code>比较，始终坚持使用<code>===</code>比较。</p>
+<p>另一个例外是<code>NaN</code>这个特殊的Number与所有其他值都不相等，包括它自己：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">NaN &#x3D;&#x3D;&#x3D; NaN; &#x2F;&#x2F; false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>唯一能判断<code>NaN</code>的方法是通过<code>isNaN()</code>函数：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">isNaN(NaN); &#x2F;&#x2F; true<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>最后要注意浮点数的相等比较：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">1 &#x2F; 3 &#x3D;&#x3D;&#x3D; (1 - 2 &#x2F; 3); &#x2F;&#x2F; false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>这不是JavaScript的设计缺陷。浮点数在运算过程中会产生误差，因为计算机无法精确表示无限循环小数。要比较两个浮点数是否相等，只能计算它们之差的绝对值，看是否小于某个阈值：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Math.abs(1 &#x2F; 3 - (1 - 2 &#x2F; 3)) &lt; 0.0000001; &#x2F;&#x2F; true<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<h4 id="null和undefined"><a href="#null和undefined" class="headerlink" title="null和undefined"></a>null和undefined</h4><p><code>null</code>表示一个“空”的值，它和<code>0</code>以及空字符串<code>&#39;&#39;</code>不同，<code>0</code>是一个数值，<code>&#39;&#39;</code>表示长度为0的字符串，而<code>null</code>表示“空”。</p>
+<p>在其他语言中，也有类似JavaScript的<code>null</code>的表示，例如Java也用<code>null</code>，Swift用<code>nil</code>，Python用<code>None</code>表示。但是，在JavaScript中，还有一个和<code>null</code>类似的<code>undefined</code>，它表示“未定义”。</p>
+<p>JavaScript的设计者希望用<code>null</code>表示一个空的值，而<code>undefined</code>表示值未定义。事实证明，这并没有什么卵用，区分两者的意义不大。大多数情况下，我们都应该用<code>null</code>。<code>undefined</code>仅仅在判断函数参数是否传递的情况下有用。</p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>数组是一组按顺序排列的集合，集合的每个值称为元素。JavaScript的数组可以包括任意数据类型。例如：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">[1, 2, 3.14, &#39;Hello&#39;, null, true];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>上述数组包含6个元素。数组用<code>[]</code>表示，元素之间用<code>,</code>分隔。</p>
+<p>另一种创建数组的方法是通过<code>Array()</code>函数实现：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">new Array(1, 2, 3); &#x2F;&#x2F; 创建了数组[1, 2, 3]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>然而，出于代码的可读性考虑，强烈建议直接使用<code>[]</code>。</p>
+<p>数组的元素可以通过索引来访问。请注意，索引的起始值为<code>0</code>：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">var arr &#x3D; [1, 2, 3.14, &#39;Hello&#39;, null, true];
+arr[0]; &#x2F;&#x2F; 返回索引为0的元素，即1
+arr[5]; &#x2F;&#x2F; 返回索引为5的元素，即true
+arr[6]; &#x2F;&#x2F; 索引超出了范围，返回undefined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><p>JavaScript的对象是一组由键-值组成的无序集合，例如：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">var person &#x3D; &#123;
+    name: &#39;Bob&#39;,
+    age: 20,
+    tags: [&#39;js&#39;, &#39;web&#39;, &#39;mobile&#39;],
+    city: &#39;Beijing&#39;,
+    hasCar: true,
+    zipcode: null
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>JavaScript对象的键都是字符串类型，值可以是任意数据类型。上述<code>person</code>对象一共定义了6个键值对，其中每个键又称为对象的属性，例如，<code>person</code>的<code>name</code>属性为<code>&#39;Bob&#39;</code>，<code>zipcode</code>属性为<code>null</code>。</p>
+<p>要获取一个对象的属性，我们用<code>对象变量.属性名</code>的方式：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">person.name; &#x2F;&#x2F; &#39;Bob&#39;
+person.zipcode; &#x2F;&#x2F; null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量的概念基本上和初中代数的方程变量是一致的，只是在计算机程序中，变量不仅可以是数字，还可以是任意数据类型。</p>
+<p>变量在JavaScript中就是用一个变量名表示，变量名是大小写英文、数字、<code>$</code>和<code>_</code>的组合，且不能用数字开头。变量名也不能是JavaScript的关键字，如<code>if</code>、<code>while</code>等。申明一个变量用<code>var</code>语句，比如：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">var a; &#x2F;&#x2F; 申明了变量a，此时a的值为undefined
+var $b &#x3D; 1; &#x2F;&#x2F; 申明了变量$b，同时给$b赋值，此时$b的值为1
+var s_007 &#x3D; &#39;007&#39;; &#x2F;&#x2F; s_007是一个字符串
+var Answer &#x3D; true; &#x2F;&#x2F; Answer是一个布尔值true
+var t &#x3D; null; &#x2F;&#x2F; t的值是null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>变量名也可以用中文，但是，请不要给自己找麻烦。</p>
+<p>在JavaScript中，使用等号<code>=</code>对变量进行赋值。可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用<code>var</code>申明一次，例如：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">var a &#x3D; 123; &#x2F;&#x2F; a的值是整数123
+a &#x3D; &#39;ABC&#39;; &#x2F;&#x2F; a变为字符串<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+
+<p>这种变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言，赋值语句如下：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">int a &#x3D; 123; &#x2F;&#x2F; a是整数类型变量，类型用int申明
+a &#x3D; &quot;ABC&quot;; &#x2F;&#x2F; 错误：不能把字符串赋给整型变量<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+
+<p>和静态语言相比，动态语言更灵活，就是这个原因。</p>
+<p>请不要把赋值语句的等号等同于数学的等号。比如下面的代码：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">var x &#x3D; 10;
+x &#x3D; x + 2;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+
+<p>如果从数学上理解<code>x = x + 2</code>那无论如何是不成立的，在程序中，赋值语句先计算右侧的表达式<code>x + 2</code>，得到结果<code>12</code>，再赋给变量<code>x</code>。由于<code>x</code>之前的值是<code>10</code>，重新赋值后，<code>x</code>的值变成<code>12</code>。</p>
+<p>要显示变量的内容，可以用<code>console.log(x)</code>，打开Chrome的控制台就可以看到结果。</p>
+<p>使用<code>console.log()</code>代替<code>alert()</code>的好处是可以避免弹出烦人的对话框。</p>
+<h3 id="strict模式"><a href="#strict模式" class="headerlink" title="strict模式"></a>strict模式</h3><p>JavaScript在设计之初，为了方便初学者学习，并不强制要求用<code>var</code>申明变量。这个设计错误带来了严重的后果：如果一个变量没有通过<code>var</code>申明就被使用，那么该变量就自动被申明为全局变量：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">i &#x3D; 10; &#x2F;&#x2F; i现在是全局变量<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>在同一个页面的不同的JavaScript文件中，如果都不用<code>var</code>申明，恰好都使用了变量<code>i</code>，将造成变量<code>i</code>互相影响，产生难以调试的错误结果。</p>
+<p>使用<code>var</code>申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。</p>
+<p>为了修补JavaScript这一严重设计缺陷，ECMA在后续规范中推出了strict模式，在strict模式下运行的JavaScript代码，强制通过<code>var</code>申明变量，未使用<code>var</code>申明变量就使用的，将导致运行错误。</p>
+<p>启用strict模式的方法是在JavaScript代码的第一行写上：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#39;use strict&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>这是一个字符串，不支持strict模式的浏览器会把它当做一个字符串语句执行，支持strict模式的浏览器将开启strict模式运行JavaScript。</p>
+<p>不用<code>var</code>申明的变量会被视为全局变量，为了避免这一缺陷，所有的JavaScript代码都应该使用strict模式。我们在后面编写的JavaScript代码将全部采用strict模式。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E6%95%99%E7%A8%8B/">教程</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2019/03/23/111/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">30个高质量免费电子书下载网站</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2018/12/28/80/">
+                        <span class="hidden-mobile">JavaScript基本语法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/blog/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        豫ICP备18039751号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/debouncer.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/blog/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

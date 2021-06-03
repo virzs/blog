@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Vir">
+  <meta name="keywords" content="">
+  
+  <title>HTML基础结构分析 - Vir的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"virs.github.io","root":"/blog/","version":"1.8.9a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/">&nbsp;<strong>Vir的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="HTML基础结构分析">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Vir
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-12-17 18:11" pubdate>
+        2018年12月17日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HTML基础结构分析</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：10 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>超文本标记语言（标准通用标记语言下的一个应用，外语缩写HTML），是迄今为止网络上应用最为广泛的语言，也是构成网页文档的主要语言。HTML文本是由HTML命令组成的描述性文本，HTML命令可以说明文字、图形、动画、声音、表格、链接等。HTML的结构包括头部（Head）、主体（Body）两大部分，其中头部描述浏览器所需的信息，而主体则包含所要说明的具体内容。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&lt;!doctype html&gt;
+    &lt;!--文档声明，位于文档中的最前面的位置告知Web浏览器页面使用的HTML版本--&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;
+    &lt;!-- meta 元信息--&gt;
+    &lt;!-- charset&#x3D;&quot;UTF-8&quot;网站的编码格式,utf-8国际通用编码格式--&gt;
+&lt;title&gt;无标题文档&lt;&#x2F;title&gt;
+    &lt;!--&lt;title&gt;网站的标题&lt;&#x2F;title&gt;--&gt;
+&lt;&#x2F;head&gt;
+    &lt;!--head结束标签--&gt;
+    &lt;!--html主体内容--&gt;
+&lt;body&gt;
+    &lt;!--只要显示页面的内容都放在body标签里--&gt;
+    &lt;!--所有的代码和符号都是英文状态下的--&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<h4 id="base"><a href="#base" class="headerlink" title="base"></a>base</h4><p>功能说明： <base>标签为页面上的所有链接规定默认地址或默认目标。通常情况下，浏览器会从当前文档的 URL 中提取相应的元素来填写相对 URL 中的空白。</p>
+<p>标准属性：href、target</p>
+<p>href：设置或获取页面中所有链接在鼠标单击链接到的URL</p>
+<p>target：设置或获取目标内容要显示于哪个窗口或框架</p>
+<p>   _blank：在一个新的未命名的窗口载入文档</p>
+<p>   _self：在相同的框架或窗口中载入目标文档</p>
+<p>   _parent：把文档载入父窗口或包含了超链接引用的框架集</p>
+<p>  _top：把文档载入包含该超链接的窗口，取代任何当前正在窗口中显示的框架</p>
+<h4 id="body"><a href="#body" class="headerlink" title="body"></a>body</h4><blockquote>
+<body>……</body>
+</blockquote>
+<p>功能说明：定义HTML文档的主体，body包含HTML文档的所有内容。</p>
+<p>标准属性：id(元素唯一标识)、class(类名)、title(显示在工具提示中的文本)、style(行内样式定义)、dir(设置文本方向)、lang(设置语言码)、background(网页背景图像)、bgcolor(背景颜色)、text(设置文字颜色)、link(设置链接文字的颜色)、alink(设置链接时文字的颜色)、vlink(设置链接后文字的颜色)、leftmargin(左外边距)、topmargin(上外边距)、bgproperties(让背景图片不跟随网页滚动，它只有一个参数fixed)</p>
+<h4 id="p"><a href="#p" class="headerlink" title="p"></a>p</h4><blockquote>
+<p>……</p>
+</blockquote>
+<p>功能说明：定义一个文档的段落</p>
+<p>标准属性：align、id、class、title、style、dir、lang</p>
+<p>使用要点：使用p来换行，并分隔段落。p元素是块元素，需要关闭标签</p>
+<h4 id="span"><a href="#span" class="headerlink" title="span"></a>span</h4><blockquote>
+<p><span>……</span></p>
+</blockquote>
+<p>功能说明：用来组合文档中的内联元素</p>
+<p>标准属性：align、id、class、title、style、dir、lang</p>
+<h4 id="div"><a href="#div" class="headerlink" title="div"></a>div</h4><blockquote>
+<div>……</div>
+</blockquote>
+<p>功能说明：定义文档中的分区或节</p>
+<p>标准属性：align、id、class、title、style、dir、lang</p>
+<p>使用要点：div元素是用来为HTML文档内大块的内容提供结构和背景元素</p>
+<h4 id="br"><a href="#br" class="headerlink" title="br"></a>br</h4><blockquote>
+<br>
+</blockquote>
+<p>功能说明：插入一个换行符</p>
+<p>标准属性：id、class、title、style</p>
+<h4 id="caption"><a href="#caption" class="headerlink" title="caption"></a>caption</h4><blockquote>
+<caption>……</caption>
+</blockquote>
+<p>功能说明：定义一个表格标题</p>
+<p>标准属性：align（对齐方式，包括left（左对齐）、right（右对齐）、top（顶端对齐）、bottom（底部对齐））、id、class、title、dir、lang</p>
+<p>使用要点：caption元素应该是table元素的子对象，caption标签必须紧随table标签之后。只能对一个表格定义一个标题，通常标题居中于表格之上。</p>
+<h4 id="col"><a href="#col" class="headerlink" title="col"></a>col</h4><blockquote>
+<col>
+</blockquote>
+<p>功能说明：为表格定义列属性值，定义的对象可以包括表格中的一个或多个列</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<p>可选属性：align（水平对齐方式，包括right（右对齐）、left（左对齐）、center（居中）、justify（两端对齐））</p>
+<p>                 span（定义应当横跨的列数，默认值为1）</p>
+<p>                 valign（垂直对齐方式，包括top(顶端对齐)、middle（垂直居中）、bottom(低端对齐)、baseline（基线对齐））  </p>
+<p>                 width（定义列的宽度）</p>
+<h4 id="colgroup"><a href="#colgroup" class="headerlink" title="colgroup"></a>colgroup</h4><p>功能说明：定义表格列的分组</p>
+<p>标准属性：id、class、 title、style、dir、lang</p>
+<p>可选属性：align、span（定义col应当横跨的列数，默认值为1）、valign、width</p>
+<p>使用要点：只有在table标签内部才是合法的，可以对列进行组合来进行相应的格式化</p>
+<h4 id="fieldset"><a href="#fieldset" class="headerlink" title="fieldset"></a>fieldset</h4><p>功能说明：将表单内的相关元素分组</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<p>使用要点：在字段集包含的文本和其他元素外面绘制方框</p>
+<h4 id="legend"><a href="#legend" class="headerlink" title="legend"></a>legend</h4><blockquote>
+<legend>……</legend>
+</blockquote>
+<p>功能说明：可为fieldset定义一个标题</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<p>使用要点：legend元素必须是fieldset内的第一个元素，此元素是内嵌元素，需要关闭标签</p>
+<h4 id="iframe"><a href="#iframe" class="headerlink" title="iframe"></a>iframe</h4><blockquote>
+<iframe>……</iframe>
+</blockquote>
+<p>标准属性：id、class、title、style</p>
+<p>基本属性：name（定义内容页名称）、src（定义内容页URL）、frameborder（定义内容页的边框，取值为0/1，默认为1，0不显示边框，1在每个页面之间都显示边框）、marginwidth（定义框架中HTML文件显示的上下边界的宽度，默认值由浏览器决定）、marginheight（定义框架中HTML文件显示的左右边界的宽度，默认值由浏览器决定）、scrolling（定义是否有滚动条，取值yes/no/auto，默 认值auto）、align、height、width</p>
+<p>使用要点：iframe元素的作用相当于在一个文档中嵌入另一个文档，或者像一个漂浮的frame，创建内嵌漂浮框架，在iframe内容源文档，background-color或body元素的bgcolor标签属性必须设置为transparent。此元素是块元素，需要关闭标签</p>
+<h4 id="dd、dl、dt"><a href="#dd、dl、dt" class="headerlink" title="dd、dl、dt"></a>dd、dl、dt</h4><blockquote>
+<dl>  
+   <dt>……</dt>  
+   <dd>……</dd>  
+   <dt>……</dt>  
+   <dd>……</dd>  
+</dl>
+</blockquote>
+<p>功能说明：dd定义在列表中的显示样式</p>
+<p>                  dl定义列表的显示样式</p>
+<p>                  dt定义列表中的项目</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<p>使用要点：dd通常在列表中缩进显示，dd元素是块元素，需要关闭标签</p>
+<p>                  dl元素是块元素，需要关闭标签</p>
+<p>                  dt 元素是块元素，需要关闭标签</p>
+<h4 id="h1……h6"><a href="#h1……h6" class="headerlink" title="h1……h6"></a>h1……h6</h4><blockquote>
+<h1>……</h1>  
+<h2>……</h2>  
+<h3>……</h3>  
+<h4>……</h4>  
+<h5>……</h5>  
+<h6>……</h6>
+</blockquote>
+<p>功能说明：定义文章的标题</p>
+<p>标准属性：align、id、class、title、style、dir、lang</p>
+<p>使用要点：</p>
+<h1>定义最大的标题，<h6>定义最小的标题，需要关闭标签
+
+<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><blockquote>
+<html>……</html>
+</blockquote>
+<p>功能说明：声明文档本身是一个HTML文档</p>
+<p>标准属性：dir、lang</p>
+<p>基本属性：common(一般属性)、xmlns(代表xml命名空间)、dir</p>
+<h4 id="ins"><a href="#ins" class="headerlink" title="ins"></a>ins</h4><blockquote>
+<p><ins>……</ins></p>
+</blockquote>
+<p>功能说明：定义文档中已被插入的文本</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<p>使用要点：ins和del标签配合使用，用来描述文档中的更新和修正</p>
+<h4 id="del"><a href="#del" class="headerlink" title="del"></a>del</h4><blockquote>
+<p><del>……</del></p>
+</blockquote>
+<p>功能说明：定义文档中已被删除的文本</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<h4 id="li"><a href="#li" class="headerlink" title="li"></a>li</h4><blockquote>
+<li>……</li>
+</blockquote>
+<p>功能说明：定义一个列表项目</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<p>使用要点：li标签可用在有序列表<ol>和无序列表<ul>中</p>
+<h4 id="ol"><a href="#ol" class="headerlink" title="ol"></a>ol</h4><blockquote>
+<ol>……</ol>
+</blockquote>
+<p>功能说明：定义有序列表</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<h4 id="ul"><a href="#ul" class="headerlink" title="ul"></a>ul</h4><blockquote>
+<ul>……</ul>
+</blockquote>
+<p>功能说明：定义无序列表</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<h4 id="table"><a href="#table" class="headerlink" title="table"></a>table</h4><blockquote>
+<table>……</table>
+</blockquote>
+<p>功能说明：定义表格的相关格式</p>
+<p>标准属性：align、id、class、title、style、dir、lang</p>
+<p>使用要点：用来显示数据，table是一个块元素，需要关闭标签</p>
+<h4 id="th"><a href="#th" class="headerlink" title="th"></a>th</h4><blockquote>
+<th>……</th>
+</blockquote>
+<p>功能说明：定义表格内的表头单元格</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<p>基本属性：common、abbr（代表表头的简写）、axis（对单元格在概念上分类）、colspan（一行跨越多列）、headers（连接表格的数据与表头）、rowspan（一列跨多行）、scope（定义行或列的表头）、align、valign</p>
+<p>使用要点：th元素内部的文本通常会呈现为粗体</p>
+<h4 id="tr"><a href="#tr" class="headerlink" title="tr"></a>tr</h4><blockquote>
+<tr>……</tr>
+</blockquote>
+<p>功能说明：在表格中定义一行</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<p>基本属性：common、align、valign</p>
+<h4 id="td"><a href="#td" class="headerlink" title="td"></a>td</h4><blockquote>
+<td>……</td>
+</blockquote>
+<p>功能说明：定义表格中的一个单元格</p>
+<p>标准属性：id、class、title、style、dir、lang</p>
+<p>基本属性：common、abbr（代表表头的简写）、axis（对单元格在概念上分类）、colspan（一行跨越多列）、headers（连接表格的数据与表头）、rowspan（一列跨多行）、scope（定义行或列的表头）、align、valign</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/HTML%E4%B8%8ECSS/">HTML与CSS</a>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E6%95%99%E7%A8%8B/">教程</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2018/12/28/77/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaScript基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/blog/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        豫ICP备18039751号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/debouncer.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/blog/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

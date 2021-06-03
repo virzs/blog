@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Vir">
+  <meta name="keywords" content="">
+  
+  <title>VSCode常用功能性插件推荐（附带链接） - Vir的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"virs.github.io","root":"/blog/","version":"1.8.9a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/">&nbsp;<strong>Vir的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="VSCode常用功能性插件推荐（附带链接）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Vir
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-16 11:26" pubdate>
+        2020年1月16日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">VSCode常用功能性插件推荐（附带链接）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：10 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>本文内容较多可以按 <code>Ctrl + F</code> 搜索。</p>
+<p><strong>提示：</strong>由于插件数量较多，简介均为插件介绍文档中内容，具体请点击链接查看插件文档。<br><strong>提示：</strong>相同功能或功能相近的插件请勿重复安装，避免造成冲突或插件相关功能使用中重复。<br><strong>提示：</strong>插件仅提供功能性增强，请牢记基础，切勿本末倒置。<br><strong>提示：</strong>请按需安装。</p>
+</blockquote>
+<ul>
+<li><strong>Auto Import</strong><br>  自动查找，解析并提供所有可用导入的代码操作和代码完成。适用于Typescript和TSX。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=steoates.autoimport">https://marketplace.visualstudio.com/items?itemName=steoates.autoimport</a></li>
+<li><strong>Auto Rename Tag</strong><br>  与Visual Studio IDE一样，自动重命名配对的HTML / XML标签。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag">https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag</a></li>
+<li><strong>Beautify</strong><br>  在Visual Studio Code中美化javascript，JSON，CSS，Sass和HTML。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify">https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify</a></li>
+<li><strong>Bracket Pair Colorizer</strong><br>  允许用颜色标识匹配的括号。用户可以定义要匹配的字符以及要使用的颜色。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer">https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer</a></li>
+<li><strong>Chinese (Simplified) Language Pack for Visual Studio Code</strong><br>  适用于 VS Code 的中文（简体）语言包。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans">https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans</a></li>
+<li><strong>Class autocomplete for HTML</strong><br>  自动匹配样式表中的class样式。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=AESSoft.aessoft-class-autocomplete">https://marketplace.visualstudio.com/items?itemName=AESSoft.aessoft-class-autocomplete</a></li>
+<li><strong>Code Runner</strong><br>  运行多种语言的代码段或代码文件： <strong>C, C++, Java, JavaScript, PHP, Python, Perl, Perl 6, Ruby, Go, Lua, Groovy, PowerShell, BAT/CMD, BASH/SH, F# Script, F# (.NET Core), C# Script, C# (.NET Core), VBScript, TypeScript, CoffeeScript, Scala, Swift, Julia, Crystal, OCaml Script, R, AppleScript, Elixir, Visual Basic .NET, Clojure, Haxe, Objective-C, Rust, Racket, Scheme, AutoHotkey, AutoIt, Kotlin, Dart, Free Pascal, Haskell, Nim, D, Lisp, Kit, V</strong><br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner">https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner</a></li>
+<li><strong>Color Info</strong><br>  提供快捷的颜色信息<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=bierner.color-info">https://marketplace.visualstudio.com/items?itemName=bierner.color-info</a></li>
+<li><strong>Comment Translate</strong><br>  许多优秀的项目，都有丰富的注释，使用者可以快速理解代码意图。但是如果使用者并不熟习注释的语言，会带来理解困难。本插件使用 Google Translate API 翻译 VSCode 的编程语言的注释。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=intellsmi.comment-translate">https://marketplace.visualstudio.com/items?itemName=intellsmi.comment-translate</a></li>
+<li><strong>CSS Peek</strong><br>  扩展了HTML和ejs代码编辑，<code>Go To Definition</code>并<code>Go To Symbol in Workspace</code>支持在源代码的字符串中找到的css / scss / less（类和ID）。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=pranaygp.vscode-css-peek">https://marketplace.visualstudio.com/items?itemName=pranaygp.vscode-css-peek</a></li>
+<li><strong>Debugger for Chrome</strong><br>  用于在Google Chrome浏览器或其他支持<a target="_blank" rel="noopener" href="https://chromedevtools.github.io/debugger-protocol-viewer/">Chrome DevTools协议的</a>目标中调试JavaScript代码。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome">https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome</a></li>
+<li><strong>Debugger for Firefox</strong><br>  用于调试在<a target="_blank" rel="noopener" href="https://www.mozilla.org/en-US/firefox/developer/?utm_medium=vscode_extension&utm_source=devtools">Mozilla Firefox浏览器中</a>运行的Web应用程序和扩展。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=firefox-devtools.vscode-firefox-debug">https://marketplace.visualstudio.com/items?itemName=firefox-devtools.vscode-firefox-debug</a></li>
+<li><strong>Easy Sass</strong><br>  保存后自动将SASS / SCSS文件编译为.css和.min.css。您还可以快速编译项目中的所有SCSS / SASS文件。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=spook.easysass">https://marketplace.visualstudio.com/items?itemName=spook.easysass</a></li>
+<li><strong>ESLint_（如果你不熟悉ESLint请勿安装）_</strong><br>  VS Code ESLint扩展。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint</a></li>
+<li><strong>filesize</strong><br>  该软件包旨在与<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a>编辑器一起使用，并且在编辑器的状态栏中显示聚焦文件的大小。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=mkxml.vscode-filesize">https://marketplace.visualstudio.com/items?itemName=mkxml.vscode-filesize</a></li>
+<li><strong>Git History</strong><br>  Git历史记录，搜索和更多内容。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory">https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory</a></li>
+<li><strong>GitLens — Git supercharged</strong><br>  GitLens <strong>supercharges</strong>内置到Visual Studio代码Git的能力。它可以帮助您通过Git责备注释和代码镜头一目了然地<strong>看到代码作者的身份</strong>，<strong>无缝地导航和浏览</strong> Git存储库，通过强大的比较命令<strong>获得有价值的见解</strong>，等等。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens</a></li>
+<li><strong>Guides</strong><br>  添加各种缩进指示线。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=spywhere.guides">https://marketplace.visualstudio.com/items?itemName=spywhere.guides</a></li>
+<li><strong>HTML CSS Support</strong><br>  Missing CSS support for HTML documents.<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css">https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css</a></li>
+<li><strong>HTML Snippets</strong><br>  输入一段代码的一部分，按Enter键，然后代码段将展开。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=abusaidm.html-snippets">https://marketplace.visualstudio.com/items?itemName=abusaidm.html-snippets</a></li>
+<li><strong>htmltagwrap</strong><br>  将您的选择包装在HTML标记中。可以包装内联选择和跨越多行的选择（可同时使用单个选择和多个选择）。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=bradgashler.htmltagwrap">https://marketplace.visualstudio.com/items?itemName=bradgashler.htmltagwrap</a></li>
+<li><strong>HTML Boilerplate</strong><br>  提供了所有Web应用程序中使用的标准HTML样板代码。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=sidthesloth.html5-boilerplate">https://marketplace.visualstudio.com/items?itemName=sidthesloth.html5-boilerplate</a></li>
+<li><strong>HTMLHint</strong><br>  将<a target="_blank" rel="noopener" href="https://github.com/htmlhint/HTMLHint">HTMLHint</a>静态分析工具集成到Visual Studio Code中。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=mkaufman.HTMLHint">https://marketplace.visualstudio.com/items?itemName=mkaufman.HTMLHint</a></li>
+<li><strong>Image preview</strong><br>  在装订线和悬停时显示图像预览 。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-gutter-preview">https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-gutter-preview</a></li>
+<li><strong>Import Cost</strong><br>  该扩展名将在编辑器中内联显示导入包的大小。该扩展程序利用带有babili-webpack-plugin的webpack来检测导入的大小。 <br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost">https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost</a></li>
+<li><strong>IntelliSense for CSS class names in HTML</strong><br>  根据在工作区中找到的定义或通过<code>link</code>元素引用的外部文件为HTML 属性提供CSS类名称 。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion">https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion</a></li>
+<li><strong>JavaScript (ES6) code snippets</strong><br>  包含<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Vs代码</a>编辑器的ES6语法的JavaScript代码片段（同时支持JavaScript和TypeScript）。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=xabikos.JavaScriptSnippets">https://marketplace.visualstudio.com/items?itemName=xabikos.JavaScriptSnippets</a></li>
+<li><strong>JavaScript Snippet Pack</strong><br>  该扩展为JavaScript和TypeScript编辑器提供了一堆有用的代码段。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=akamud.vscode-javascript-snippet-pack">https://marketplace.visualstudio.com/items?itemName=akamud.vscode-javascript-snippet-pack</a></li>
+<li><strong>jQuery Code Snippets</strong><br>  只需输入字母“ jq”即可获取所有可用的jQuery代码段的列表。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.jquerysnippets">https://marketplace.visualstudio.com/items?itemName=donjayamanne.jquerysnippets</a></li>
+<li><strong>JSON to TS</strong><br>  将JSON对象转换为Typescript。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=MariusAlchimavicius.json-to-ts">https://marketplace.visualstudio.com/items?itemName=MariusAlchimavicius.json-to-ts</a></li>
+<li><strong>JSON Tools</strong><br>  用于处理JSON的工具。您可以使用此扩展程序漂亮/缩小JSON。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=eriklynd.json-tools">https://marketplace.visualstudio.com/items?itemName=eriklynd.json-tools</a></li>
+<li><strong>Live Server</strong><br>  启动具有实时重新加载功能的本地开发服务器，以处理静态和动态页面。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer</a></li>
+<li><strong>Markdown Preview Enhanced</strong><br>  Markdown预览增强<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced">https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced</a></li>
+<li><strong>Markdown Table Formatter</strong><br>  一个简单的markdown插件格式化表格。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=fcrespo82.markdown-table-formatter">https://marketplace.visualstudio.com/items?itemName=fcrespo82.markdown-table-formatter</a></li>
+<li><strong>npm</strong><br>  该扩展支持运行文件中定义的npm脚本，<code>package.json</code>并支持根据中定义的依赖项验证已安装的模块<code>package.json</code>。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=eg2.vscode-npm-script">https://marketplace.visualstudio.com/items?itemName=eg2.vscode-npm-script</a></li>
+<li><strong>npm Intellisense</strong><br>  可自动完成导入语句中的npm模块。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense">https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense</a></li>
+<li><strong>open in browser</strong><br>  使用<code>Alt + B</code>快捷方式在默认浏览器中打开当前_html_文件，或<code>Shift + Alt + B</code>选择一个浏览器。您也可以像图片一样右键单击<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=techer.open-in-browser">https://marketplace.visualstudio.com/items?itemName=techer.open-in-browser</a></li>
+<li><strong>Paste JSON as Code</strong><br>  从JSON，JSON Schema和TypeScript交互式生成类型和（反）序列化代码 。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype">https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype</a></li>
+<li><strong>Path Intellisense</strong><br>  路径智能感知<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense">https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense</a></li>
+<li><strong>Polacode</strong><br>  Polacode —您的代码的拍立得<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=pnp.polacode">https://marketplace.visualstudio.com/items?itemName=pnp.polacode</a></li>
+<li><strong>Prettify JSON</strong><br>  在VSCode中美化JSON<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=mohsen1.prettify-json">https://marketplace.visualstudio.com/items?itemName=mohsen1.prettify-json</a></li>
+<li><strong>SQLTools - Database tools</strong><br>  数据库管理做对了。连接浏览器，查询运行器，智能感知，书签，查询历史记录。感觉像数据库英雄！<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools">https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools</a></li>
+<li><strong>SVG Viewer</strong><br>  用于Visual Studio代码的SVG查看器 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items/cssho.vscode-svgviewer">Visual Studio Marketplace</a><br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer">https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer</a></li>
+<li><strong>Trailing Spaces</strong><br>  突出显示尾随空格，并立即删除它们！<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces">https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces</a></li>
+<li><strong>Vetur</strong><br>  VS Code的Vue工具 。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">https://marketplace.visualstudio.com/items?itemName=octref.vetur</a></li>
+<li><strong>vscode-fileheader</strong><br>  在文件标题中添加注释，并支持自动更新文件的修改时间。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=mikey.vscode-fileheader">https://marketplace.visualstudio.com/items?itemName=mikey.vscode-fileheader</a></li>
+<li><strong>Vue VSCode Snippets</strong><br>  Vue VSCode片段<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets">https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets</a></li>
+<li><strong>XML Tools</strong><br>  用于Visual Studio代码的XML工具。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml">https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml</a></li>
+<li><strong>Zip File Explorer</strong><br>  在树浏览器中显示Zip文件的内容 。<br>  <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-zipexplorer">https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-zipexplorer</a></li>
+</ul>
+<p>先推荐这么多，再次提醒：请按需添加。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E6%8F%92%E4%BB%B6/">插件</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2020/01/18/222/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">原生JS实现限制input上传文件格式、大小及清空</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2020/01/14/215/">
+                        <span class="hidden-mobile">JS数组对象排序</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/blog/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        豫ICP备18039751号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/debouncer.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/blog/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

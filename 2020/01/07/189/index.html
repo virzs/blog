@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Vir">
+  <meta name="keywords" content="">
+  
+  <title>HTML常用meta - Vir的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"virs.github.io","root":"/blog/","version":"1.8.9a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/">&nbsp;<strong>Vir的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="HTML常用meta">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Vir
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-07 15:48" pubdate>
+        2020年1月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HTML常用meta</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：10 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>Meta标签是HTML中的一个辅助性标签，位于HTML文档头部和title标签之间，提供用户不可见的信息。<br>Meta：即元数据（Metadata）是数据的数据信息。</p>
+<p>元数据可以被使用浏览器，搜索引擎或其他Web服务调用。</p>
+</blockquote>
+<h3 id="基础数据设置"><a href="#基础数据设置" class="headerlink" title="基础数据设置"></a><strong>基础数据设置</strong></h3><ul>
+<li><strong>定义文档的字符编码</strong><br>  <code>&lt;meta charset=&quot;utf-8&quot; /&gt;</code></li>
+<li><strong>强制浏览器内核为<code>Chromium</code>内核（主要用于国产双核浏览器）</strong><br>  <code>&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot; /&gt;</code><br>  <code>&lt;meta name= &quot;force-rendering&quot; content=&quot;webkit&quot; /&gt;</code></li>
+<li><strong>如果有安装<code>Google Chrome Frame</code>插件则强制为<code>Chromium</code>内核，否则强制为本机支持的最高版本IE内核，（作用于IE浏览器）</strong><br>  <code>&lt;meta http=equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=Edge,chrome=1&quot; /&gt;</code></li>
+<li><strong>设置视窗大小</strong><br>  <code>width</code>：设置<code>layout viewport</code>的宽度，为一个正整数，或为字符串“<code>width-device</code>”；<br>  <code>initial-scale</code>：设置页面的初始缩放值，为一个数字，可以带小数；<br>  <code>minimum-scale</code>：允许用户的最小缩放值，为一个数字，可以带小数；<br>  <code>maximum-scale</code>：允许用户的最大缩放值，为一个数字，可以带小数；<br>  <code>shrink-to-fit=no</code>：IOS9中使以上属性生效时加入；<br>  <code>height</code>：设置<code>layout viewport</code>的高度，为一个正整数（通常很少使用）;<br>  <code>user-scalable</code>：是否允许用户进行缩放，值为“no”或“yes”，“no”代表不允许，“yes”代表允许；<br>  <code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0,shrink-to-fit=no,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot; /&gt;</code></li>
+<li><strong>页面描述</strong><br>  <code>&lt;meta name=&quot;description&quot; content=&quot;不超过150个字符&quot; /&gt;</code></li>
+<li><strong>页面关键词</strong><br>  <code>&lt;meta name=&quot;keywords&quot; content=&quot;空格或“,”隔开&quot; /&gt;</code></li>
+<li><strong>网页作者</strong><br>  <code>&lt;meta name=&quot;author&quot; content=&quot;name,email@xxx.com&quot; /&gt;</code></li>
+<li><strong>搜索引擎抓取</strong><br>  <code>all</code>：文件将被检索，且页面上的链接可以被查询；<br>  <code>none</code>：文件将不被检索，且页面上的链接不可以被查询；<br>  <code>index</code>：文件将被检索；<br>  <code>follow</code>：页面上的链接可以被查询；<br>  <code>noindex</code>：文件将不被检索；<br>  <code>nofollow</code>：页面上的链接不可以被查询。<br>  <code>&lt;meta name=&quot;robots&quot; content=&quot;index,follow&quot; /&gt;</code></li>
+<li><strong>忽略页面中的数字识别为电话，忽略email识别</strong><br>  <code>&lt;meta name=&quot;format-detection&quot; content=&quot;telphone=no,email=no&quot; /&gt;</code></li>
+</ul>
+<h3 id="针对浏览器"><a href="#针对浏览器" class="headerlink" title="针对浏览器"></a>针对浏览器</h3><ul>
+<li><strong>拒绝百度转码</strong><br>  <code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-siteapp&quot; /&gt;</code></li>
+<li><strong>针对手持设备优化，主要针对一些老的不识别viewport的浏览器</strong><br>  <code>&lt;meta name=&quot;HandheldFriendly&quot; content=&quot;true&quot; /&gt;</code></li>
+<li><strong>针对微软老式浏览器</strong><br>  <code>&lt;meta name=&quot;MobileOptimized&quot; content=&quot;320&quot; /&gt;</code></li>
+<li><strong>UC强制竖屏</strong><br>  <code>&lt;meta name=&quot;screen-orientation&quot; content=&quot;portrait&quot; /&gt;</code></li>
+<li><strong>QQ强制竖屏</strong><br>  <code>&lt;meta name=&quot;x5-orientation&quot; content=&quot;portrait&quot; /&gt;</code></li>
+<li><strong>UC强制全屏</strong><br>  <code>&lt;meta name=&quot;full-screen&quot; content=&quot;yes&quot; /&gt;</code></li>
+<li><strong>QQ强制全屏</strong><br>  <code>&lt;meta name=&quot;x5-fullscreen&quot; content=&quot;true&quot; /&gt;</code></li>
+<li><strong>UC应用模式</strong><br>  <code>&lt;meta name=&quot;browsermode&quot; content=&quot;application&quot; /&gt;</code></li>
+<li><strong>QQ应用模式</strong><br>  <code>&lt;meta name=&quot;x5-page-mode&quot; content=&quot;app&quot; /&gt;</code></li>
+<li><strong>Windows Phone点击无高光</strong><br>  <code>&lt;meta name=&quot;msapplication-tap-highlight&quot; content=&quot;no&quot; /&gt;</code></li>
+</ul>
+<h3 id="针对IOS数据设置"><a href="#针对IOS数据设置" class="headerlink" title="针对IOS数据设置"></a>针对IOS数据设置</h3><ul>
+<li><strong>添加到主屏后的标题</strong><br>  <code>&lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;标题&quot; /&gt;</code></li>
+<li><strong>当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对IOS的Safari浏览器（IOS7.0版本以后，Safari上已看不到效果）</strong><br>  <code>&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot; /&gt;</code></li>
+<li><strong>是否启用Webapp全屏模式，删除苹果默认的工具栏和菜单栏</strong><br>  <code>&lt;meta name=&quot;apple-touch-fullscreen&quot; content=&quot;yes&quot; /&gt;</code></li>
+<li><strong>添加智能App广告条Smart App Banner（IOS6+ Safari）</strong><br>  <code>&lt;meta name=&quot;apple-itunes-app&quot; content=&quot;app-id=myAppStoreID,affiliate-data=myAffiliateData,app-argument=myURL&quot; /&gt;</code></li>
+<li><strong>设置苹果工具栏颜色：默认值为default（白色），可以设置为black（黑色）和black-translucent（灰色半透明）</strong><br>  <code>&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot; /&gt;</code></li>
+</ul>
+<h3 id="IOS网站添加至桌面时的图标"><a href="#IOS网站添加至桌面时的图标" class="headerlink" title="IOS网站添加至桌面时的图标"></a>IOS网站添加至桌面时的图标</h3><ul>
+<li><strong>iPhone和iTouch，默认57x57像素，必须设置</strong><br>  <code>&lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;57x57&quot; href=&quot;table_ico57.png&quot;&gt;</code></li>
+<li><strong>Retina iPhone 和 Retina iTouch，114x114 像素，可以没有，但推荐有</strong><br>  <code>&lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;72x72&quot; href=&quot;table_ico72.png&quot;&gt;</code><br>  <code>&lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;114x114&quot; href=&quot;table_ico114.png&quot;&gt;</code></li>
+<li><strong>Retina iPad，144x144 像素，可以没有，但推荐有</strong><br>  <code>&lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;144x144&quot; href=&quot;table_ico144.png&quot;&gt;</code></li>
+</ul>
+<h3 id="IOS启动画面"><a href="#IOS启动画面" class="headerlink" title="IOS启动画面"></a>IOS启动画面</h3><ul>
+<li><strong>iPad 竖屏 768 x 1004（标准分辨率）</strong><br>  <code>&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;768x1004&quot; href=&quot;/splash-screen-768x1004.png&quot;/&gt;</code></li>
+<li><strong>iPad 横屏 1024x748（标准分辨率）</strong><br>  <code>&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;1024x748&quot; href=&quot;/Default-Portrait-1024x748.png&quot;/&gt;</code></li>
+<li><strong>iPad 竖屏 1536x2008（Retina）</strong><br>  <code>&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;1536x2008&quot; href=&quot;/splash-screen-1536x2008.png&quot;/&gt;</code></li>
+<li><strong>iPad 横屏 2048x1496（Retina）</strong><br>  <code>&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;2048x1496&quot; href=&quot;/splash-screen-2048x1496.png&quot;/&gt;</code></li>
+<li><strong>iPhone/iPod Touch 竖屏 320x480 (标准分辨率)</strong><br>  <code>&lt;link rel=&quot;apple-touch-startup-image&quot; href=&quot;/splash-screen-320x480.png&quot;/&gt;</code></li>
+<li><strong>iPhone/iPod Touch 竖屏 640x960 (Retina)</strong><br>  <code>&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;640x960&quot; href=&quot;/splash-screen-640x960.png&quot;/&gt;</code></li>
+<li><strong>iPhone 5/iPod Touch 5 竖屏 640x1136 (Retina)</strong><br>  <code>&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;640x1136&quot; href=&quot;/splash-screen-640x1136.png&quot;/&gt;</code></li>
+</ul>
+<h3 id="Windows-8磁贴设置"><a href="#Windows-8磁贴设置" class="headerlink" title="Windows 8磁贴设置"></a>Windows 8磁贴设置</h3><ul>
+<li><strong>Windows 8 磁贴颜色</strong><br>  <code>&lt;meta name=&quot;msapplication-TileColor&quot; content=&quot;#000&quot;/&gt;</code></li>
+<li><strong>Windows 8 磁贴图标</strong><br>  <code>&lt;meta name=&quot;msapplication-TileImage&quot; content=&quot;icon.png&quot;/&gt;</code></li>
+<li><strong>添加 RSS 订阅</strong><br>  <code>&lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;RSS&quot; href=&quot;/rss.xml&quot;/&gt;</code></li>
+</ul>
+<h3 id="SNS社交标签"><a href="#SNS社交标签" class="headerlink" title="SNS社交标签"></a>SNS社交标签</h3><ul>
+<li><strong>参考微博API</strong><br>  `<meta property="og:type" content="类型" />    <meta property="og:url" content="URL地址" />  
+  <meta property="og:title" content="标题" />  
+  <meta property="og:image" content="图片" />  
+  <meta property="og:description" content="描述" />`</li>
+</ul>
+<h3 id="低版本IE浏览器访问问题"><a href="#低版本IE浏览器访问问题" class="headerlink" title="低版本IE浏览器访问问题"></a>低版本IE浏览器访问问题</h3><blockquote>
+<p>添加好强制Webkit内核的代码，使用国产浏览器访问网站已经不存在IE兼容问题了，IE访客量将大大减少。但仍然不可避免会有一些老旧电脑通过低版本IE浏览器访问，如果我们专门为了这极小部分用户进行 CSS HACK ，将严重加重我们的工作量。<br>更何况自2016年1月起微软已经停止为IE11以下版本提供支持和更新，已经这么久没有更新，低版本IE不仅对CSS3和HTML5支持有问题，更有安全问题。<br>那么，我们不去支持低版本IE，这小部分用户怎么办呢？<br>我们可以使用 if IE 语句给网站添加IE升级提示，提示用户进行浏览器升级，或者切换更先进的浏览器再访问。<br>我们可以在刚刚的meta标签下添加一段跳转到IE升级提示页的代码（当IE版本低于IE11时跳转），实现低版本IE用户访问时提示他们进行升级或者更换浏览器。<br>强制Webkit内核和提示低版本IE访问用户升级完整代码如下所示，把这段代码添加到头部模板文件标签下即可：  </p>
+<meta name="renderer" content="webkit"/>  
+<meta name="force-rendering" content="webkit"/>  
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>  
+<script> /\*@cc\_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @\*/ </script>  
+（@cc\_on 是 IE10 及更旧版IE特有的条件编译语句，因此可以用来判断是否除 IE11 以外的其他IE版本。）  
+因为低版本IE访问时因为不兼容CSS3和HTML5网站往往是错版的，添加了上面这段代码，当低版本IE用户访问时就会跳转到升级提示页，避免不必要的资源加载，降低网站服务器开销。</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/HTML5/">HTML5</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2020/01/08/191/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于网站版权声明(Copyright)的格式和写法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2020/01/07/187/">
+                        <span class="hidden-mobile">解决Vue中数据改变，DOM未重新渲染的问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/blog/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        豫ICP备18039751号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/debouncer.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/blog/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

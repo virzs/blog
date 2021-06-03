@@ -1,0 +1,631 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Vir">
+  <meta name="keywords" content="">
+  
+  <title>搜索框实现各大搜索引擎智能提示功能（jsonp跨域实现自动补全搜索建议） - Vir的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"virs.github.io","root":"/blog/","version":"1.8.9a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/">&nbsp;<strong>Vir的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="搜索框实现各大搜索引擎智能提示功能（jsonp跨域实现自动补全搜索建议）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Vir
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-18 16:28" pubdate>
+        2020年1月18日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">搜索框实现各大搜索引擎智能提示功能（jsonp跨域实现自动补全搜索建议）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：10 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p><strong>首先是各大搜索引擎的数据</strong></p>
+<p><strong>谷歌/google：</strong><a target="_blank" rel="noopener" href="http://suggestqueries.google.com/complete/search?client=youtube&q=#content#&jsonp=window.google.ac.h">http://suggestqueries.google.com/complete/search?client=youtube&amp;q=#content#&amp;jsonp=window.google.ac.h</a><br><strong>callback：</strong>window.google.ac.h<br><strong>返回值：</strong>window.google.ac.h([“关键字”,[[“关键字规划师”,0],[“关键字研究工具”,0],[“关键字”,0],[“关键字 搜寻量”,0],[“关键字提取”,0],[“关键字参数”,0],[“关键字广告收费方式”,0],[“关键字广告是什么”,0],[“关键字 英文”,0],[“关键字驱动”,0]],{“k”:1,”q”:”5mIo50mwAhPfTuFojvpE9njU9Fc”}])</p>
+<p><strong>百度/baidu：</strong><a target="_blank" rel="noopener" href="http://suggestion.baidu.com/su?wd=#content#&cb=window.baidu.sug">http://suggestion.baidu.com/su?wd=#content#&amp;cb=window.baidu.sug</a><br><strong>callback：</strong>window.baidu.sug<br><strong>返回值：</strong>window.baidu.sug({q:”关键字”,p:false,s:[“关键字优化”,”关键字是什么”,”c语言关键字”,”excel关键字排序”,”关键字和标识符区别”,”关键字优化_选择站优云”,”关键字优化_选择站优云丶”,”关键字优化_都赞站优云”,”关键字递增排序”,”关键字是关系中能够用来唯一标识元组的属性”]});</p>
+<p><strong>必应/bing：</strong><a target="_blank" rel="noopener" href="http://api.bing.com/qsonhs.aspx?type=cb&q=#content#&cb=window.bing.sug">http://api.bing.com/qsonhs.aspx?type=cb&amp;q=#content#&amp;cb=window.bing.sug</a><br><strong>callback：</strong>window.bing.sug<br><strong>返回值：</strong>if(typeof window.bing.sug == ‘function’) window.bing.sug({“AS”:{“Query”:”关键字”,”FullResults”:1,”Results”:[{“Type”:”AS”,”Suggests”:[{“Txt”:”关键字点右边选项可分类搜索”,”Type”:”AS”,”Sk”:””,”HCS”:0},{“Txt”:”关键字驱动”,”Type”:”AS”,”Sk”:”AS1”},{“Txt”:”关键字提取”,”Type”:”AS”,”Sk”:”AS2”},{“Txt”:”关键字搜索的技巧”,”Type”:”AS”,”Sk”:”AS3”},{“Txt”:”关键字云图”,”Type”:”AS”,”Sk”:”AS4”},{“Txt”:”关键字屏蔽”,”Type”:”AS”,”Sk”:”AS5”},{“Txt”:”关键字supper的作用是”,”Type”:”AS”,”Sk”:”AS6”},{“Txt”:”关键字参数 python”,”Type”:”AS”,”Sk”:”AS7”}]}]}}/* pageview_candidate */);</p>
+<p><strong>好搜/so：</strong><a target="_blank" rel="noopener" href="https://sug.so.360.cn/suggest?encodein=utf-8&encodeout=utf-8&format=json&word=#content#&callback=window.so.sug">https://sug.so.360.cn/suggest?encodein=utf-8&amp;encodeout=utf-8&amp;format=json&amp;word=#content#&amp;callback=window.so.sug</a><br><strong>callback：</strong>window.so.sug<br><strong>返回值：</strong>window.so.sug({“ext”:”nlpv=zzzc_0”,”query”:”关键字”,”result”:[{“rank”:”0.009386”,”resrc”:”0.287926”,”source”:”recall”,”word”:”关键字广告”},{“rank”:”0.008406”,”resrc”:”0.556381”,”source”:”recall”,”word”:”关键字查询”},{“rank”:”0.005110”,”resrc”:”0.380169”,”source”:”recall”,”word”:”关键字优化”},{“rank”:”0.001996”,”resrc”:”0.225187”,”source”:”recall”,”word”:”关键字工具”},{“rank”:”0.000570”,”resrc”:”0.363073”,”source”:”recall”,”word”:”关键字搜索引擎”},{“rank”:”0.000547”,”resrc”:”0.353710”,”source”:”recall”,”word”:”关键字排名”},{“rank”:”0.000395”,”resrc”:”0.283342”,”source”:”recall”,”word”:”关键字查询工具”},{“rank”:”0.000216”,”resrc”:”0.177443”,”source”:”recall”,”word”:”关键字优化技巧”},{“rank”:”0.000200”,”resrc”:”0.166434”,”source”:”recall”,”word”:”关键字搜索”},{“rank”:”0.000199”,”resrc”:”0.165665”,”source”:”recall”,”word”:”关键字加密工具”}],”ssid”:”1e9edd15637f4da5b6af8e06f722b255”,”version”:”personal”}<br>)</p>
+<p><strong>搜狗/sougou：</strong><a target="_blank" rel="noopener" href="https://www.sogou.com/suggnew/ajajjson?type=web&key=#content#">https://www.sogou.com/suggnew/ajajjson?type=web&amp;key=#content#</a><br><strong>callback：</strong>window.sogou.sug<br><strong>返回值：</strong>window.sogou.sug([“关键字”,[“关键字挖掘”,”关键字搜索”,”关键字 点击搜索进入”,”关键字是什么”,”关键字序列”,”关键字static的作用是什么”,”关键字 点右边选项可分类搜索”,”关键字排序”,”关键字驱动测试英文”,”关键字广告”],[“0;0;0;0”,”1;0;0;0”,”2;0;0;0”,”3;0;0;0”,”4;0;0;0”,”5;0;0;0”,”6;0;0;0”,”7;0;0;0”,”8;0;0;0”,”9;0;0;0”],[“”,””,””,””,””,””,””,””,””,””],[“0”],””,”suglabId_1”],-1);</p>
+<p><strong>为了方便使用我将搜索引擎数据放在一个数组对象中</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&quot;engine&quot;: [&#123;
+        &quot;name&quot;: &quot;谷歌&quot;,
+        &quot;value&quot;: &quot;google&quot;,
+        &quot;href&quot;: &quot;https:&#x2F;&#x2F;www.google.com&#x2F;search?q&#x3D;&quot;,
+        &quot;sugurl&quot;: &quot;http:&#x2F;&#x2F;suggestqueries.google.com&#x2F;complete&#x2F;search?client&#x3D;youtube&amp;q&#x3D;#content#&amp;jsonp&#x3D;window.google.ac.h&quot;,
+        &quot;icon&quot;: &quot;.&#x2F;img&#x2F;engineLogo&#x2F;google.ico&quot;,
+        &quot;show&quot;: true,
+        &quot;select&quot;: &quot;&quot;
+    &#125;, &#123;
+        &quot;name&quot;: &quot;必应&quot;,
+        &quot;value&quot;: &quot;bing&quot;,
+        &quot;href&quot;: &quot;https:&#x2F;&#x2F;cn.bing.com&#x2F;search?q&#x3D;&quot;,
+        &quot;sugurl&quot;: &quot;http:&#x2F;&#x2F;api.bing.com&#x2F;qsonhs.aspx?type&#x3D;cb&amp;q&#x3D;#content#&amp;cb&#x3D;window.bing.sug&quot;,
+        &quot;icon&quot;: &quot;.&#x2F;img&#x2F;engineLogo&#x2F;bing.ico&quot;,
+        &quot;show&quot;: true,
+        &quot;select&quot;: &quot;selected&quot;
+    &#125;, &#123;
+        &quot;name&quot;: &quot;百度&quot;,
+        &quot;value&quot;: &quot;baidu&quot;,
+        &quot;href&quot;: &quot;https:&#x2F;&#x2F;www.baidu.com&#x2F;s?wd&#x3D;&quot;,
+        &quot;sugurl&quot;: &quot;http:&#x2F;&#x2F;suggestion.baidu.com&#x2F;su?wd&#x3D;#content#&amp;cb&#x3D;window.baidu.sug&quot;,
+        &quot;icon&quot;: &quot;.&#x2F;img&#x2F;engineLogo&#x2F;baidu.svg&quot;,
+        &quot;show&quot;: true,
+        &quot;select&quot;: &quot;&quot;
+    &#125;, &#123;
+        &quot;name&quot;: &quot;搜狗&quot;,
+        &quot;value&quot;: &quot;sougou&quot;,
+        &quot;href&quot;: &quot;https:&#x2F;&#x2F;www.sogou.com&#x2F;web?query&#x3D;&quot;,
+        &quot;sugurl&quot;: &quot;https:&#x2F;&#x2F;www.sogou.com&#x2F;suggnew&#x2F;ajajjson?type&#x3D;web&amp;key&#x3D;#content#&quot;,
+        &quot;icon&quot;: &quot;.&#x2F;img&#x2F;engineLogo&#x2F;sougou.ico&quot;,
+        &quot;show&quot;: true,
+        &quot;select&quot;: &quot;&quot;
+    &#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>JSONP是<strong>跨域访问</strong>的一种方式。由于服务器返回的JavaScript代码可以直接引用，通过回调函数的方式就可以<strong>间接的获取</strong>服务器的数据。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; searchInput为获取的输入框
+let searchInput &#x3D; document.querySelector(&quot;#searchInput&quot;);
+&#x2F;&#x2F; 监听按键抬起
+searchInput.onkeyup &#x3D; () &#x3D;&gt; &#123;
+    &#x2F;&#x2F; 获取选择的搜索引擎
+    let engineValue &#x3D; selectEngine.childNodes[0].alt; 
+    &#x2F;&#x2F; 从数据源中找到选中的搜索引擎
+    &#x2F;&#x2F; 如果没有多个搜索引擎切换可以忽略
+    let engine &#x3D; jsonData.engine.find(item &#x3D;&gt; item.value &#x3D;&#x3D; engineValue);
+    &#x2F;&#x2F; 将链接赋值给变量
+    let [href, sugurl] &#x3D; [engine.href, engine.sugurl];
+    &#x2F;&#x2F; 获取输入框的值
+    let value &#x3D; searchInput.value;
+    &#x2F;&#x2F; 如果输入框的值为空则清空列表并隐藏
+    if (value &#x3D;&#x3D; &quot;&quot;) &#123;
+        searchList.innerHTML &#x3D; &quot;&quot;;
+        searchList.style.display &#x3D; &quot;none&quot;;
+        return;
+    &#125;
+    &#x2F;&#x2F; 替换链接中&#39;#content#&#39;为输入框的值
+    sugurl &#x3D; sugurl.replace(&quot;#content#&quot;, value);
+    &#x2F;&#x2F; 各个引擎的callback，由于各搜索引擎返回的数据不同需要做判断
+    &#x2F;&#x2F; sugValue为定义的函数，用来接收获取到的数据
+    window.google &#x3D; &#123;
+        ac: &#123;
+            h: function (json) &#123;
+                sugValue(href, json[1])
+            &#125;
+        &#125;
+    &#125;
+    window.bing &#x3D; &#123;
+        sug: function (json) &#123;
+            sugValue(href, json.AS.Results[0].Suggests);
+        &#125;
+    &#125;
+    window.baidu &#x3D; &#123;
+        sug: function (json) &#123;
+            sugValue(href, json.s)
+        &#125;
+    &#125;
+    window.sogou &#x3D; &#123;
+        sug: function (json) &#123;
+            sugValue(href, json[1])
+        &#125;
+    &#125;
+    &#x2F;&#x2F; 创建script标签
+    let script &#x3D; document.createElement(&quot;script&quot;);
+    script.src &#x3D; sugurl;
+    document.querySelector(&quot;head&quot;).appendChild(script);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 接收返回数据的函数
+function sugValue(href, value) &#123;
+    let sugList &#x3D; &quot;&quot;;
+    if (value.length &#x3D;&#x3D; 0) &#123;
+        return;
+    &#125;
+    &#x2F;&#x2F; 根据返回值判断渲染
+    value.forEach(item &#x3D;&gt; &#123;
+        if (typeof item &#x3D;&#x3D; &quot;string&quot;) &#123;
+            sugList +&#x3D; &#96;&lt;li&gt;&lt;a href&#x3D;&quot;$&#123;href&#125;$&#123;item&#125;&quot;&gt;$&#123;item&#125;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;&#96;
+        &#125; else if (typeof item &#x3D;&#x3D; &quot;object&quot; &amp;&amp; item.Txt !&#x3D;&#x3D; undefined) &#123;
+            sugList +&#x3D; &#96;&lt;li&gt;&lt;a href&#x3D;&quot;$&#123;href&#125;$&#123;item.Txt&#125;&quot;&gt;$&#123;item.Txt&#125;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;&#96;
+        &#125; else &#123;
+            sugList +&#x3D; &#96;&lt;li&gt;&lt;a href&#x3D;&quot;$&#123;href&#125;$&#123;item[0]&#125;&quot;&gt;$&#123;item[0]&#125;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;&#96;
+        &#125;
+    &#125;)
+    searchList.innerHTML &#x3D; sugList;
+    searchList.style.display &#x3D; &quot;block&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p><strong>什么是跨域：</strong></p>
+<p><em>跨域是由浏览器同源策略引起的，是指页面请求的接口地址，必须与页面url地址处于同域上（即域名，端口，协议相同）。这是为了防止某域名下的接口被其他域名下的网页非法调用，是浏览器对JavaScript施加的安全限制。</em></p>
+<p><strong>前端解决跨域问题常用的解决方案：</strong></p>
+<ul>
+<li>  <strong>JSONP</strong>：利用script标签可跨域的特点，在跨域脚本中可以直接回调当前脚本的函数。</li>
+<li>  <strong>CORS</strong>：服务器设置HTTP响应头中Access-Control-Allow-Origin值，解除跨域限制。</li>
+<li>  . . .</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/">代码片段</a>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2020/02/04/230/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用JSONP跨域失败问题解答</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2020/01/18/222/">
+                        <span class="hidden-mobile">原生JS实现限制input上传文件格式、大小及清空</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/blog/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        豫ICP备18039751号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/debouncer.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/blog/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

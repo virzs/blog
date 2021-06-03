@@ -1,0 +1,1259 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Vir">
+  <meta name="keywords" content="">
+  
+  <title>ES6 Promise - Vir的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"virs.github.io","root":"/blog/","version":"1.8.9a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/">&nbsp;<strong>Vir的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ES6 Promise">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Vir
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-16 11:20" pubdate>
+        2019年12月16日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      105
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ES6 Promise</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：10 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="1-Promise含义"><a href="#1-Promise含义" class="headerlink" title="1.Promise含义"></a>1.Promise含义</h2><h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
+<li>  异步编程的一种解决方案（相较于回调函数和事件更合理，更强大）</li>
+<li>  一个保存着某个未来才会结束的事件（通常是一个异步操作）的结果的容器</li>
+<li>  对象的状态不受外界影响（pending进行中，fulfilled已成功，rejected已失败）</li>
+<li>  一旦状态改变，就不会再次变化，任何时候都可以得到这个结果（状态变化，只有两种可能：从pending转为fulfilled；从pending转为rejected）</li>
+<li>  将异步操作以同步操作的流程表达出来，避免层层嵌套的回调函数</li>
+</ul>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ul>
+<li>  无法取消Promise，一旦新建会立即执行，无法中途取消</li>
+<li>  如果不设置回调函数，Promise内部抛出的错误不会反应到外部</li>
+<li>  当处于pending状态时，无法得知目前进行到那个阶段</li>
+</ul>
+<h2 id="2-基本用法"><a href="#2-基本用法" class="headerlink" title="2.基本用法"></a>2.基本用法</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const promise &#x3D; new Promise(function(resolve,reject)&#123;
+    if(&#x2F;*异步操作成功*&#x2F;)&#123;
+        resolve(value);
+    &#125;else&#123;
+        reject(error);
+    &#125;
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>Promise构造函数接受一个函数作为参数，该参数的两个参数分别是resolve和reject。他们是两个函数，由JS引擎提供，不需要自己部署。</p>
+<p>resolve函数的作用是将Promise对象的状态从未完成（pending）转换为已成功（resolved），在异步操作成功时调用，并将异步操作的结果作为参数传递过去。</p>
+<p>reject函数的作用是将Promise对象的状态从未完成（pending）转换为已失败（rejected），在异步操作失败时调用，并将异步操作报出的错误作为参数传递出去。</p>
+<p>Promise对象生成以后，可以使用then方法分别指定resolved状态和rejected状态的回调函数。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">promise.then(function(value)&#123;
+    &#x2F;&#x2F;success
+&#125;,function(error)&#123;
+    &#x2F;&#x2F;failure
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数时Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">function timeout(ms)&#123;
+    return new Promise((resolve,reject)&#x3D;&gt;&#123;
+        setTimeout(resolve,ms,&#39;done&#39;);
+    &#125;)
+&#125;
+timeout(100).then((value)&#x3D;&gt;&#123;
+    console.log(value);
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>timeout方法返回一个Promise实例，表示一段时间以后才会发生的结果。过了指定的时间（ms参数）以后，Promise实例的状态变为resolved，就会触发then方法绑定的回调函数。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">let promise &#x3D; new Promise(function(resolve,reject)&#123;
+    console.log(&#39;Promise&#39;);
+    resolve();
+&#125;);
+promise.then(function()&#123;
+    console.log(&#39;resolved.&#39;);
+&#125;);
+console.log(&#39;Hi!&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>Promise新建后会立即执行，所以首先输出的是Promise。然后then方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以resolved最后输出。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;异步加载图片示例
+function loadImageAsync(url)&#123;
+    return new Promise(function(resolve,reject)&#123;
+        const image &#x3D; new Image();
+        image.onload &#x3D; function()&#123;
+            resolve(image);
+        &#125;;
+        image.onerror &#x3D; function()&#123;
+            reject(new Error(&#39;Could not load image at &#39;+url));
+        &#125;;
+        image.src&#x3D;url;
+    &#125;);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>使用Promise包装了一个图片加载的异步操作，如果加载成功，就调用resolve方法，否则就调用reject方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;Promise对象实现Ajax操作
+const getJSON &#x3D; function(url)&#123;
+    const promise &#x3D; new Promise(function(resolve,reject)&#123;
+        const handler &#x3D; function()&#123;
+            if(this.readyState !&#x3D;&#x3D; 4)&#123;
+                return;
+            &#125;
+            if(this.status &#x3D;&#x3D;&#x3D; 200)&#123;
+                resolve(this.response);
+            &#125;else&#123;
+                reject(new Error(this.statusText));
+            &#125;
+        &#125;;
+        const client &#x3D; new XMLHttpRequest();
+        client.open(&quot;Get&quot;,url);
+        client.onreadystatechange &#x3D; handler;
+        client.responseType &#x3D; &quot;json&quot;;
+        client.setRequestHeader(&quot;Accept&quot;,&quot;application&#x2F;json&quot;);
+        client.send();
+    &#125;);
+    return promise;
+&#125;
+getJSON(&quot;&#x2F;posts.json&quot;).then(function(json)&#123;
+    console.log(&quot;Contents:&quot; + json);
+&#125;,function(error)&#123;
+    console.error(&quot;出错了:&quot; + error);
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>getJSON是对XMLHttpRequest对象的封装，用于发出一个针对JSON数据的HTTP请求，并且返回一个Promise对象。</p>
+<p>在getJSON内部，resolve函数和reject函数调用时，都带有参数。</p>
+<p>如果调用resolve函数和reject函数时带有参数，那么他们的参数会被传递给回调函数。reject函数的参数通常是ERROR对象的实例，表示抛出的错误，resolve函数的参数除了正常的值以外，还可能是另一个Promise实例。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;案例
+const p1 &#x3D; new Promise(function (resolve, reject) &#123;
+  &#x2F;&#x2F; ...
+&#125;);
+
+const p2 &#x3D; new Promise(function (resolve, reject) &#123;
+  &#x2F;&#x2F; ...
+  resolve(p1);
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>p1和p2都是Promise的实例，但是p2的resolve方法将p1作为一个参数，即一个异步操作的结果是返回另一个异步操作。</p>
+<p>需要注意的是：这时p1的状态就会传递给p2，也就是说p1的状态决定了p2的状态。如果p1的状态时pending，那么p2的回调函数就会等待p1的状态改变，如果p1的状态已经是resolved或者rejected，那么p2的回调函数将会立刻执行。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const p1 &#x3D; new Promise(function(resolve,reject)&#123;
+    setTimeout(()&#x3D;&gt;reject(new Error(&#39;fail&#39;)),3000);
+&#125;);
+const p2 &#x3D; new Promise(function(resolve,reject)&#123;
+    setTimeout(()&#x3D;&gt;resolve(p1),1000)
+&#125;)
+p2.then(result&#x3D;&gt;console.log(result))
+  .catch(error&#x3D;&gt;console.log(error))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>p1是一个Promise，3秒之后变为rejected。p2的状态在1秒之后改变，resolve方法返回的是p1.由于p2返回的是另一个Prmise，导致p2自己的状态无效了，由p1的状态决定p2的状态。所以，后面的then语句都变成针对后者（p1）.又过了2秒，p1变为rejected，导致触发catch方法指定的回到函数。</p>
+<p>调用resolve或reject并不会终结Promise的参数函数的执行。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">new Promise((resolve,reject)&#x3D;&gt;&#123;
+    resolve(1);
+    console.log(2);
+&#125;).then(r&#x3D;&gt;&#123;
+    console.log(r);
+&#125;)
+&#x2F;&#x2F;2
+&#x2F;&#x2F;1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>调用resolve(1)后，后面的console.log(2)还是会执行，并且会首先打印出来。这是因为立即resolved的Promsie是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务。</p>
+<p>一般来说，调用resolve或reject以后，Promise的使命就完成了，后续操作应该放到then方法里面，而不应该直接写在resolve或reject的后面。所以，最好在他们前面加上return语句，这样就不会有意外。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">new Promise((resolve,reject)&#x3D;&gt;&#123;
+    return resolve(1);
+    console.log(2); &#x2F;&#x2F;该语句不会执行
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<h2 id="3-Promise方法"><a href="#3-Promise方法" class="headerlink" title="3.Promise方法"></a>3.Promise方法</h2><h3 id="Promise-prototype-then"><a href="#Promise-prototype-then" class="headerlink" title="Promise.prototype.then()"></a>Promise.prototype.then()</h3><p>Promise实例具有then方法，也就是说，then方法是定义在原型对象Promise.prototype上的。它的作用是为Promise实例添加状态改变时的回调函数。前面说过，then方法的第一个参数是resolved状态的回调函数，第二个参数（可选）是rejected状态的回调函数。</p>
+<p>then方法返回的是一个新的Promise实例（非原来的Promise实例）。因此可以采用链式写法：then方法后面再调用另一个then方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">getJSON(&quot;&#x2F;posts.json&quot;).then(function(json)&#123;
+    return json.post;
+&#125;).then(function(post)&#123;
+    &#x2F;&#x2F;...
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>使用then方法，依次指定了两个回调函数。第一个回调函数完成以后，会将返回结果作为参数，传入第二个回调函数。</p>
+<p>采用链式的then方法，可以指定一组按照次序调用的回调函数。这时，前一个回调函数，有可能返回的还是一个Promise对象（即有异步操作），这时后一个回调函数，就会等待该Promise对象的状态发生变化，才会被调用。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">getJSON(&quot;&#x2F;post&#x2F;1.json&quot;).then(function(post)&#123;
+    return getJSON(post.commentURL);
+&#125;).then(function(comments)&#123;
+    console.log(&quot;resolved:&quot;,comments);
+&#125;,function(err)&#123;
+    console.log(&quot;reject:&quot;,err);
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>第一个then方法指定的回调函数，返回的是另一个Promise对象。这是，第二个then方法指定的回调函数就会等待这个新的Promise对象状态发生变化。如果变为resolved，就调用第一个回调函数，如果状态变为rejected，就调用第二个回调函数。</p>
+<p>采用箭头函数，可以使代码更简洁。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">getJSON(&quot;&#x2F;post&#x2F;1.json&quot;).then(
+  post &#x3D;&gt; getJSON(post.commentURL)
+).then(
+  comments &#x3D;&gt; console.log(&quot;resolved: &quot;, comments),
+  err &#x3D;&gt; console.log(&quot;rejected: &quot;, err)
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<h3 id="Promise-prototype-catch"><a href="#Promise-prototype-catch" class="headerlink" title="Promise.prototype.catch()"></a>Promise.prototype.catch()</h3><p>Promise.prototype.catch方法是.then(null,rejection)或.then(undefined,rejected)的别名，用于指定发生错误时的回调函数。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">getJSON(&quot;&#x2F;posts.json&quot;).then(function(posts)&#123;
+    &#x2F;&#x2F;...
+&#125;).catch(function(error)&#123;
+    &#x2F;&#x2F;处理getJSON和前一个回调函数运行时发生的错误
+    console.log(&quot;发生错误&quot;,error);
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>getJSON方法返回一个Promise对象，如果该对象状态变为resolved，则会调用then方法指定的回调函数；如果异步操作抛出错误，状态就会变为rejected，就会调用catch方法指定的回调函数，处理这个错误。另外，then方法指定的回调函数，如果运行中抛出错误，也会被catch方法捕获。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">p.then((val) &#x3D;&gt; console.log(&#39;fulfilled:&#39;, val))
+  .catch((err) &#x3D;&gt; console.log(&#39;rejected&#39;, err));
+&#x2F;&#x2F; 等同于
+p.then((val) &#x3D;&gt; console.log(&#39;fulfilled:&#39;, val))
+  .then(null, (err) &#x3D;&gt; console.log(&quot;rejected:&quot;, err));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const promise &#x3D; new Promise(function(resolve, reject) &#123;
+  throw new Error(&#39;test&#39;);
+&#125;);
+promise.catch(function(error) &#123;
+  console.log(error);
+&#125;);
+&#x2F;&#x2F; Error: test<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>promise抛出一个错误，就会被catch方法指定的回调函数捕获。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 写法一
+const promise &#x3D; new Promise(function(resolve, reject) &#123;
+  try &#123;
+    throw new Error(&#39;test&#39;);
+  &#125; catch(e) &#123;
+    reject(e);
+  &#125;
+&#125;);
+promise.catch(function(error) &#123;
+  console.log(error);
+&#125;);
+
+&#x2F;&#x2F; 写法二
+const promise &#x3D; new Promise(function(resolve, reject) &#123;
+  reject(new Error(&#39;test&#39;));
+&#125;);
+promise.catch(function(error) &#123;
+  console.log(error);
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>reject方法的作用，等同于抛出错误。</p>
+<p>如果Promise状态已经变成resolved，再抛出错误是无效的。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const promise &#x3D; new Promise(function(resolve,reject)&#123;
+    resolve(&quot;OK&quot;);
+    throw new Error(&quot;test&quot;);
+&#125;);
+promise.then(function(value)&#123;
+    console.log(value);
+&#125;).catch(function(error)&#123;
+    console.log(error)
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>Promise在resolve语句后面，再抛出错误，不会被捕获，等于没有抛出。因为Promise的状态一旦改变，就永久保持该状态，不会再变了。</p>
+<p>Promise对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个catch语句捕获。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">getJSON(&#39;&#x2F;post&#x2F;1.json&#39;).then(function(post) &#123;
+  return getJSON(post.commentURL);
+&#125;).then(function(comments) &#123;
+  &#x2F;&#x2F; some code
+&#125;).catch(function(error) &#123;
+  &#x2F;&#x2F; 处理前面三个Promise产生的错误
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>一共有三个Promise对象：一个由getJSON产生，两个由then产生。他们之中任何一个抛出的错误，都会被最后一个catch捕获。</p>
+<p>一般来说，不建议在then方法里面定义Reject状态的回调函数（即then的第二个参数），总是使用catch方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; bad
+promise
+  .then(function(data) &#123;
+    &#x2F;&#x2F; success
+  &#125;, function(err) &#123;
+    &#x2F;&#x2F; error
+  &#125;);
+
+&#x2F;&#x2F; good
+promise
+  .then(function(data) &#123; &#x2F;&#x2F;cb
+    &#x2F;&#x2F; success
+  &#125;)
+  .catch(function(err) &#123;
+    &#x2F;&#x2F; error
+  &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>第二种写法要好于第一种写法，理由是第二种写法可以捕获前面then方法执行中的错误，也更接近同步的写法（try/catch）。因此，建议总是使用catch方法，而不使用then方法的第二个参数。</p>
+<p>跟传统的try/catch代码块不同的是，如果没有使用catch方法指定错误处理的回调函数，Promise对象抛出的错误不会传递到外层代码，即不会有任何反应。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const someAsyncThing &#x3D; function() &#123;
+  return new Promise(function(resolve, reject) &#123;
+    &#x2F;&#x2F; 下面一行会报错，因为x没有声明
+    resolve(x + 2);
+  &#125;);
+&#125;;
+
+someAsyncThing().then(function() &#123;
+  console.log(&#39;everything is great&#39;);
+&#125;);
+
+setTimeout(() &#x3D;&gt; &#123; console.log(123) &#125;, 2000);
+&#x2F;&#x2F; Uncaught (in promise) ReferenceError: x is not defined
+&#x2F;&#x2F; 123<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>someAsyncThing函数产生的Promise对象，内部有语法错误。浏览器运行到这一行，会打印出错误提示：ReferenceError:x is not defined，但不会退出进程、终止脚本执行，2秒后还是会输出123.这就是说，Promise内部的错误不会影响到Promise外部的代码，通俗的说法就是“Promise会吃掉错误”。</p>
+<p>这个脚本放在服务器执行，退出码就是0（即表示执行成功）。不过Node有一个unhandledRejection事件，专门监听未捕获的reject错误，上面的脚本会触发这个事件的监听函数，可以在监听函数里面抛出错误。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">promise.on(&quot;unhandledRejection&quot;,function(err,p)&#123;
+    throw err;
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>unhandledRejection事件的监听函数有两个参数，第一个是错误对象，第二个是报错的Promise实例，它可以用来了解发生错误的环境信息。</p>
+<p>Node有计划在未来废除unhandledRejection事件。如果Promise内部有未捕获的错误，会直接终止进程，并且进程的退出码不为0。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const promise &#x3D; new Promise(function (resolve, reject) &#123;
+  resolve(&#39;ok&#39;);
+  setTimeout(function () &#123; throw new Error(&#39;test&#39;) &#125;, 0)
+&#125;);
+promise.then(function (value) &#123; console.log(value) &#125;);
+&#x2F;&#x2F; ok
+&#x2F;&#x2F; Uncaught Error: test<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>Promise指定在下一轮“事件循环”再抛出错误。到了这个时候，Promise的运行已经结束了，所以这个错误是在Promise函数体外抛出的，会冒泡到最外层，成了未捕获的错误。</p>
+<p>一般总是建议Promise对象后面要跟catch方法，这样可以处理Promise内部发生的错误。catch方法返回的还是一个Promise对象，因此后面还可以接着调用then方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const someAsyncThing &#x3D; function() &#123;
+  return new Promise(function(resolve, reject) &#123;
+    &#x2F;&#x2F; 下面一行会报错，因为x没有声明
+    resolve(x + 2);
+  &#125;);
+&#125;;
+
+someAsyncThing()
+.catch(function(error) &#123;
+  console.log(&#39;oh no&#39;, error);
+&#125;)
+.then(function() &#123;
+  console.log(&#39;carry on&#39;);
+&#125;);
+&#x2F;&#x2F; oh no [ReferenceError: x is not defined]
+&#x2F;&#x2F; carry on<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>代码运行结束catch方法指定的回调函数，会接着运行后面那个then方法指定的回调函数。如果没有报错，则会跳过catch方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Promise.resolve()
+.catch(function(error) &#123;
+  console.log(&#39;oh no&#39;, error);
+&#125;)
+.then(function() &#123;
+  console.log(&#39;carry on&#39;);
+&#125;);
+&#x2F;&#x2F; carry on<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面的代码中因为没有报错，跳过了catch方法，直接执行后面的then方法。此时要是then方法里面报错，就与前面的catch无关了。</p>
+<p>catch方法之中还能再抛出错误。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const someAsyncThing &#x3D; function() &#123;
+  return new Promise(function(resolve, reject) &#123;
+    &#x2F;&#x2F; 下面一行会报错，因为x没有声明
+    resolve(x + 2);
+  &#125;);
+&#125;;
+
+someAsyncThing().then(function() &#123;
+  return someOtherAsyncThing();
+&#125;).catch(function(error) &#123;
+  console.log(&#39;oh no&#39;, error);
+  &#x2F;&#x2F; 下面一行会报错，因为 y 没有声明
+  y + 2;
+&#125;).then(function() &#123;
+  console.log(&#39;carry on&#39;);
+&#125;);
+&#x2F;&#x2F; oh no [ReferenceError: x is not defined]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面的代码中，catch方法抛出一个错误，因为后面没有别的catch方法了，导致这个错误不会被捕获，也不会传递到外层。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">someAsyncThing().then(function() &#123;
+  return someOtherAsyncThing();
+&#125;).catch(function(error) &#123;
+  console.log(&#39;oh no&#39;, error);
+  &#x2F;&#x2F; 下面一行会报错，因为y没有声明
+  y + 2;
+&#125;).catch(function(error) &#123;
+  console.log(&#39;carry on&#39;, error);
+&#125;);
+&#x2F;&#x2F; oh no [ReferenceError: x is not defined]
+&#x2F;&#x2F; carry on [ReferenceError: y is not defined]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面的代码中，第二个catch方法用来捕获前一个catch方法抛出的错误。</p>
+<h3 id="Promise-prototype-finally"><a href="#Promise-prototype-finally" class="headerlink" title="Promise.prototype.finally()"></a>Promise.prototype.finally()</h3><p>finally方法用于指定不管Promise对象最后状态如何，都会执行的操作。该方法是ES2018引入标准的。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">promise.then(result&#x3D;&gt;&#123;...&#125;)
+       .catch(error&#x3D;&gt;&#123;...&#125;)
+       .finally(()&#x3D;&gt;&#123;...&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>不管Promise最后的状态，在执行完then或catch指定的回调函数以后，都会执行finally方法指定的回调函数。</p>
+<p>服务器使用Promise处理请求，然后使用finally方法关掉服务器。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">server.listen(post)
+    .then(function()&#123;
+        &#x2F;&#x2F;...
+    &#125;)
+    .finally(server.stop);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>finally方法的回调函数不接受任何参数，这意味着没有办法知道，前面的Promise状态到底是fulfilled还是rejected。这表明finally方法里面的操作，应该是与状态无关的，不依赖于Promise的执行结果。</p>
+<p>finally本质上是then方法的特例。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">promise.finally(()&#x3D;&gt;&#123;
+    &#x2F;&#x2F;语句
+&#125;)
+&#x2F;&#x2F;等同于
+promise.then(result&#x3D;&gt;&#123;
+    &#x2F;&#x2F;语句
+    return result;
+&#125;,error&#x3D;&gt;&#123;
+    &#x2F;&#x2F;语句
+    throw error;
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>如果不使用finally方法，同样的语句需要为成功和失败两种情况各写一次。有了finally方法，则只需要写一次。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Promise.prototype.finally &#x3D; function(callback)&#123;
+    let P &#x3D; this.constructor;
+    return this.then(
+        value &#x3D;&gt; P.resolve(callback()).then(()&#x3D;&gt;value),
+        reason &#x3D;&gt; P.resolve(callback()).then(()&#x3D;&gt;&#123;throw reason&#125;)
+    );
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面的代码中，不管前面的Promise是fulfilled还是rejected，都会执行回调函数callback。finally方法总是会返回原来的值。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; resolve 的值是 undefined
+Promise.resolve(2).then(() &#x3D;&gt; &#123;&#125;, () &#x3D;&gt; &#123;&#125;)
+&#x2F;&#x2F; resolve 的值是 2
+Promise.resolve(2).finally(() &#x3D;&gt; &#123;&#125;)
+&#x2F;&#x2F; reject 的值是 undefined
+Promise.reject(3).then(() &#x3D;&gt; &#123;&#125;, () &#x3D;&gt; &#123;&#125;)
+&#x2F;&#x2F; reject 的值是 3
+Promise.reject(3).finally(() &#x3D;&gt; &#123;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<h3 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all()"></a>Promise.all()</h3><p>Promise.all()方法用于将多个Promise实例，包装成一个新的Promise实例。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const p &#x3D; Promise.all([p1,p2,p3]);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>Promise.all()方法接受一个数组作为参数，p1、p2、p3都是Promise实例，如果不是则会先调用Promise.resolve方法，将参数转为Promise实例，再进行处理。另外，Promise.all()方法的参数可以不是数组，但必须具有Iterator接口，且返回的每个成员都是Promise实例。</p>
+<p>p的状态由p1、p2、p3决定，分成两种情况：</p>
+<ol>
+<li> 只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。</li>
+<li> 只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数。</li>
+</ol>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const promises &#x3D; [2,3,5,7,11,13].map(function(id)&#123;
+    return getJSON(&#39;&#x2F;post&#x2F;&#39;+id+&#39;.json&#39;);
+&#125;);
+Promise.all(promises).then(function(posts)&#123;
+    &#x2F;&#x2F;...
+&#125;).catch(function(reason)&#123;
+    &#x2F;&#x2F;...
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>promises是包含6个Promise实例的数组，只有这6个实例的状态都变成fulfilled，或者其中有一个变为rejected，才会调用<code>Promise.all</code>方法后面的回调函数。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const databasePromise &#x3D; connectDatabase();
+
+const booksPromise &#x3D; databasePromise
+  .then(findAllBooks);
+
+const userPromise &#x3D; databasePromise
+  .then(getCurrentUser);
+
+Promise.all([
+  booksPromise,
+  userPromise
+])
+.then(([books, user]) &#x3D;&gt; pickTopRecommendations(books, user));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p><code>booksPromise</code>和<code>userPromise</code>是两个异步操作，只有等到它们的结果都返回了，才会触发<code>pickTopRecommendations</code>这个回调函数。</p>
+<p>注意，如果作为参数的 Promise 实例，自己定义了<code>catch</code>方法，那么它一旦被<code>rejected</code>，并不会触发<code>Promise.all()</code>的<code>catch</code>方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const p1 &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;
+  resolve(&#39;hello&#39;);
+&#125;)
+.then(result &#x3D;&gt; result)
+.catch(e &#x3D;&gt; e);
+
+const p2 &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;
+  throw new Error(&#39;报错了&#39;);
+&#125;)
+.then(result &#x3D;&gt; result)
+.catch(e &#x3D;&gt; e);
+
+Promise.all([p1, p2])
+.then(result &#x3D;&gt; console.log(result))
+.catch(e &#x3D;&gt; console.log(e));
+&#x2F;&#x2F; [&quot;hello&quot;, Error: 报错了]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p><code>p1</code>会<code>resolved</code>，<code>p2</code>首先会<code>rejected</code>，但是<code>p2</code>有自己的<code>catch</code>方法，该方法返回的是一个新的 Promise 实例，<code>p2</code>指向的实际上是这个实例。该实例执行完<code>catch</code>方法后，也会变成<code>resolved</code>，导致<code>Promise.all()</code>方法参数里面的两个实例都会<code>resolved</code>，因此会调用<code>then</code>方法指定的回调函数，而不会调用<code>catch</code>方法指定的回调函数。</p>
+<p>如果<code>p2</code>没有自己的<code>catch</code>方法，就会调用<code>Promise.all()</code>的<code>catch</code>方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const p1 &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;
+  resolve(&#39;hello&#39;);
+&#125;)
+.then(result &#x3D;&gt; result);
+
+const p2 &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;
+  throw new Error(&#39;报错了&#39;);
+&#125;)
+.then(result &#x3D;&gt; result);
+
+Promise.all([p1, p2])
+.then(result &#x3D;&gt; console.log(result))
+.catch(e &#x3D;&gt; console.log(e));
+&#x2F;&#x2F; Error: 报错了<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<h3 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h3><p><code>Promise.race()</code>方法同样是将多个Promise实例包装成一个新的Promise实例。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const p &#x3D; Promise.race([p1,p2,p3]);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>只要p1，p2，p3之中有一个实例率先改变状态，p的状态也会跟着改变。那个率先改变的Promise实例的返回值，就传递给p的回调函数。</p>
+<p><code>Promise.race()</code>方法的参数与<code>Promise.all()</code>方法一样，如果不是 Promise 实例，就会先调用下面讲到的<code>Promise.resolve()</code>方法，将参数转为 Promise 实例，再进一步处理。</p>
+<p>如果指定时间内没有获得结果，就将 Promise 的状态变为<code>reject</code>，否则变为<code>resolve</code>。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const p &#x3D; Promise.race([
+  fetch(&#39;&#x2F;resource-that-may-take-a-while&#39;),
+  new Promise(function (resolve, reject) &#123;
+    setTimeout(() &#x3D;&gt; reject(new Error(&#39;request timeout&#39;)), 5000)
+  &#125;)
+]);
+
+p
+.then(console.log)
+.catch(console.error);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>如果 5 秒之内<code>fetch</code>方法无法返回结果，变量<code>p</code>的状态就会变为<code>rejected</code>，从而触发<code>catch</code>方法指定的回调函数。</p>
+<h3 id="Promise-allSettled"><a href="#Promise-allSettled" class="headerlink" title="Promise.allSettled()"></a>Promise.allSettled()</h3><p><code>Promise.allSettled()</code>方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。只有等到所有这些参数实例都返回结果，不管是<code>fulfilled</code>还是<code>rejected</code>，包装实例才会结束。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const promises &#x3D; [
+  fetch(&#39;&#x2F;api-1&#39;),
+  fetch(&#39;&#x2F;api-2&#39;),
+  fetch(&#39;&#x2F;api-3&#39;),
+];
+
+await Promise.allSettled(promises);
+removeLoadingIndicator();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码对服务器发出三个请求，等到三个请求都结束，不管请求成功还是失败，加载的滚动图标就会消失。</p>
+<p>该方法返回的新的 Promise 实例，一旦结束，状态总是<code>fulfilled</code>，不会变成<code>rejected</code>。状态变成<code>fulfilled</code>后，Promise 的监听函数接收到的参数是一个数组，每个成员对应一个传入<code>Promise.allSettled()</code>的 Promise 实例。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const resolved &#x3D; Promise.resolve(42);
+const rejected &#x3D; Promise.reject(-1);
+
+const allSettledPromise &#x3D; Promise.allSettled([resolved, rejected]);
+
+allSettledPromise.then(function (results) &#123;
+  console.log(results);
+&#125;);
+&#x2F;&#x2F; [
+&#x2F;&#x2F;    &#123; status: &#39;fulfilled&#39;, value: 42 &#125;,
+&#x2F;&#x2F;    &#123; status: &#39;rejected&#39;, reason: -1 &#125;
+&#x2F;&#x2F; ]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码中，<code>Promise.allSettled()</code>的返回值<code>allSettledPromise</code>，状态只可能变成<code>fulfilled</code>。它的监听函数接收到的参数是数组<code>results</code>。该数组的每个成员都是一个对象，对应传入<code>Promise.allSettled()</code>的两个 Promise 实例。每个对象都有<code>status</code>属性，该属性的值只可能是字符串<code>fulfilled</code>或字符串<code>rejected</code>。<code>fulfilled</code>时，对象有<code>value</code>属性，<code>rejected</code>时有<code>reason</code>属性，对应两种状态的返回值。</p>
+<p>下面是返回值用法的例子。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const promises &#x3D; [ fetch(&#39;index.html&#39;), fetch(&#39;https:&#x2F;&#x2F;does-not-exist&#x2F;&#39;) ];
+const results &#x3D; await Promise.allSettled(promises);
+
+&#x2F;&#x2F; 过滤出成功的请求
+const successfulPromises &#x3D; results.filter(p &#x3D;&gt; p.status &#x3D;&#x3D;&#x3D; &#39;fulfilled&#39;);
+
+&#x2F;&#x2F; 过滤出失败的请求，并输出原因
+const errors &#x3D; results
+  .filter(p &#x3D;&gt; p.status &#x3D;&#x3D;&#x3D; &#39;rejected&#39;)
+  .map(p &#x3D;&gt; p.reason);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>有时候，我们不关心异步操作的结果，只关心这些操作有没有结束。这时，<code>Promise.allSettled()</code>方法就很有用。如果没有这个方法，想要确保所有操作都结束，就很麻烦。<code>Promise.all()</code>方法无法做到这一点。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const urls &#x3D; [ &#x2F;* ... *&#x2F; ];
+const requests &#x3D; urls.map(x &#x3D;&gt; fetch(x));
+
+try &#123;
+  await Promise.all(requests);
+  console.log(&#39;所有请求都成功。&#39;);
+&#125; catch &#123;
+  console.log(&#39;至少一个请求失败，其他请求可能还没结束。&#39;);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码中，<code>Promise.all()</code>无法确定所有请求都结束。想要达到这个目的，写起来很麻烦，有了<code>Promise.allSettled()</code>，这就很容易了。</p>
+<h3 id="Promise-any"><a href="#Promise-any" class="headerlink" title="Promise.any()"></a>Promise.any()</h3><p><code>Promise.any()</code>方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。只要参数实例有一个变成<code>fulfilled</code>状态，包装实例就会变成<code>fulfilled</code>状态；如果所有参数实例都变成<code>rejected</code>状态，包装实例就会变成<code>rejected</code>状态。该方法目前是一个第三阶段的提案 。</p>
+<p><code>Promise.any()</code>跟<code>Promise.race()</code>方法很像，只有一点不同，就是不会因为某个 Promise 变成<code>rejected</code>状态而结束。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const promises &#x3D; [
+  fetch(&#39;&#x2F;endpoint-a&#39;).then(() &#x3D;&gt; &#39;a&#39;),
+  fetch(&#39;&#x2F;endpoint-b&#39;).then(() &#x3D;&gt; &#39;b&#39;),
+  fetch(&#39;&#x2F;endpoint-c&#39;).then(() &#x3D;&gt; &#39;c&#39;),
+];
+try &#123;
+  const first &#x3D; await Promise.any(promises);
+  console.log(first);
+&#125; catch (error) &#123;
+  console.log(error);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码中，<code>Promise.any()</code>方法的参数数组包含三个 Promise 操作。其中只要有一个变成<code>fulfilled</code>，<code>Promise.any()</code>返回的 Promise 对象就变成<code>fulfilled</code>。如果所有三个操作都变成<code>rejected</code>，那么就会<code>await</code>命令就会抛出错误。</p>
+<p><code>Promise.any()</code>抛出的错误，不是一个一般的错误，而是一个 AggregateError 实例。它相当于一个数组，每个成员对应一个被<code>rejected</code>的操作所抛出的错误。下面是 AggregateError 的实现示例。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">new AggregateError() extends Array -&gt; AggregateError
+
+const err &#x3D; new AggregateError();
+err.push(new Error(&quot;first error&quot;));
+err.push(new Error(&quot;second error&quot;));
+throw err;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>捕捉错误时，如果不用<code>try...catch</code>结构和 await 命令，可以像下面这样写。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Promise.any(promises).then(
+  (first) &#x3D;&gt; &#123;
+    &#x2F;&#x2F; Any of the promises was fulfilled.
+  &#125;,
+  (error) &#x3D;&gt; &#123;
+    &#x2F;&#x2F; All of the promises were rejected.
+  &#125;
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>下面是一个例子。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">var resolved &#x3D; Promise.resolve(42);
+var rejected &#x3D; Promise.reject(-1);
+var alsoRejected &#x3D; Promise.reject(Infinity);
+
+Promise.any([resolved, rejected, alsoRejected]).then(function (result) &#123;
+  console.log(result); &#x2F;&#x2F; 42
+&#125;);
+
+Promise.any([rejected, alsoRejected]).catch(function (results) &#123;
+  console.log(results); &#x2F;&#x2F; [-1, Infinity]
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<h3 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a>Promise.resolve()</h3><p>有时需要将现有对象转为 Promise 对象，<code>Promise.resolve()</code>方法就起到这个作用。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const jsPromise &#x3D; Promise.resolve($.ajax(&#39;&#x2F;whatever.json&#39;));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>上面代码将 jQuery 生成的<code>deferred</code>对象，转为一个新的 Promise 对象。</p>
+<p><code>Promise.resolve()</code>等价于下面的写法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Promise.resolve(&#39;foo&#39;)
+&#x2F;&#x2F; 等价于
+new Promise(resolve &#x3D;&gt; resolve(&#39;foo&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p><code>Promise.resolve</code>方法的参数分成四种情况。</p>
+<p><strong>（1）参数是一个 Promise 实例</strong></p>
+<p>如果参数是 Promise 实例，那么<code>Promise.resolve</code>将不做任何修改、原封不动地返回这个实例。</p>
+<p><strong>（2）参数是一个<code>thenable</code>对象</strong></p>
+<p><code>thenable</code>对象指的是具有<code>then</code>方法的对象，比如下面这个对象。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">let thenable &#x3D; &#123;
+  then: function(resolve, reject) &#123;
+    resolve(42);
+  &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p><code>Promise.resolve</code>方法会将这个对象转为 Promise 对象，然后就立即执行<code>thenable</code>对象的<code>then</code>方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">let thenable &#x3D; &#123;
+  then: function(resolve, reject) &#123;
+    resolve(42);
+  &#125;
+&#125;;
+
+let p1 &#x3D; Promise.resolve(thenable);
+p1.then(function(value) &#123;
+  console.log(value);  &#x2F;&#x2F; 42
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码中，<code>thenable</code>对象的<code>then</code>方法执行后，对象<code>p1</code>的状态就变为<code>resolved</code>，从而立即执行最后那个<code>then</code>方法指定的回调函数，输出 42。</p>
+<p><strong>（3）参数不是具有<code>then</code>方法的对象，或根本就不是对象</strong></p>
+<p>如果参数是一个原始值，或者是一个不具有<code>then</code>方法的对象，则<code>Promise.resolve</code>方法返回一个新的 Promise 对象，状态为<code>resolved</code>。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const p &#x3D; Promise.resolve(&#39;Hello&#39;);
+
+p.then(function (s)&#123;
+  console.log(s)
+&#125;);
+&#x2F;&#x2F; Hello<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码生成一个新的 Promise 对象的实例<code>p</code>。由于字符串<code>Hello</code>不属于异步操作（判断方法是字符串对象不具有 then 方法），返回 Promise 实例的状态从一生成就是<code>resolved</code>，所以回调函数会立即执行。<code>Promise.resolve</code>方法的参数，会同时传给回调函数。</p>
+<p><strong>（4）不带有任何参数</strong></p>
+<p><code>Promise.resolve()</code>方法允许调用时不带参数，直接返回一个<code>resolved</code>状态的 Promise 对象。</p>
+<p>所以，如果希望得到一个 Promise 对象，比较方便的方法就是直接调用<code>Promise.resolve()</code>方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const p &#x3D; Promise.resolve();
+
+p.then(function () &#123;
+  &#x2F;&#x2F; ...
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码的变量<code>p</code>就是一个 Promise 对象。</p>
+<p>需要注意的是，立即<code>resolve()</code>的 Promise 对象，是在本轮“事件循环”（event loop）的结束时执行，而不是在下一轮“事件循环”的开始时。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">setTimeout(function () &#123;
+  console.log(&#39;three&#39;);
+&#125;, 0);
+
+Promise.resolve().then(function () &#123;
+  console.log(&#39;two&#39;);
+&#125;);
+
+console.log(&#39;one&#39;);
+
+&#x2F;&#x2F; one
+&#x2F;&#x2F; two
+&#x2F;&#x2F; three<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码中，<code>setTimeout(fn, 0)</code>在下一轮“事件循环”开始时执行，<code>Promise.resolve()</code>在本轮“事件循环”结束时执行，<code>console.log(&#39;one&#39;)</code>则是立即执行，因此最先输出。</p>
+<h3 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject()"></a>Promise.reject()</h3><p><code>Promise.reject(reason)</code>方法也会返回一个新的 Promise 实例，该实例的状态为<code>rejected</code>。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const p &#x3D; Promise.reject(&#39;出错了&#39;);
+&#x2F;&#x2F; 等同于
+const p &#x3D; new Promise((resolve, reject) &#x3D;&gt; reject(&#39;出错了&#39;))
+
+p.then(null, function (s) &#123;
+  console.log(s)
+&#125;);
+&#x2F;&#x2F; 出错了<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码生成一个 Promise 对象的实例<code>p</code>，状态为<code>rejected</code>，回调函数会立即执行。</p>
+<p>注意，<code>Promise.reject()</code>方法的参数，会原封不动地作为<code>reject</code>的理由，变成后续方法的参数。这一点与<code>Promise.resolve</code>方法不一致。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const thenable &#x3D; &#123;
+  then(resolve, reject) &#123;
+    reject(&#39;出错了&#39;);
+  &#125;
+&#125;;
+
+Promise.reject(thenable)
+.catch(e &#x3D;&gt; &#123;
+  console.log(e &#x3D;&#x3D;&#x3D; thenable)
+&#125;)
+&#x2F;&#x2F; true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码中，<code>Promise.reject</code>方法的参数是一个<code>thenable</code>对象，执行以后，后面<code>catch</code>方法的参数不是<code>reject</code>抛出的“出错了”这个字符串，而是<code>thenable</code>对象。</p>
+<h3 id="Promise-try"><a href="#Promise-try" class="headerlink" title="Promise.try()"></a>Promise.try()</h3><p>实际开发中，经常遇到一种情况：不知道或者不想区分，函数<code>f</code>是同步函数还是异步操作，但是想用 Promise 来处理它。因为这样就可以不管<code>f</code>是否包含异步操作，都用<code>then</code>方法指定下一步流程，用<code>catch</code>方法处理<code>f</code>抛出的错误。一般就会采用下面的写法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Promise.resolve().then(f)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>上面的写法有一个缺点，就是如果<code>f</code>是同步函数，那么它会在本轮事件循环的末尾执行。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const f &#x3D; () &#x3D;&gt; console.log(&#39;now&#39;);
+Promise.resolve().then(f);
+console.log(&#39;next&#39;);
+&#x2F;&#x2F; next
+&#x2F;&#x2F; now<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码中，函数<code>f</code>是同步的，但是用 Promise 包装了以后，就变成异步执行了。</p>
+<p>那么有没有一种方法，让同步函数同步执行，异步函数异步执行，并且让它们具有统一的 API 呢？回答是可以的，并且还有两种写法。第一种写法是用<code>async</code>函数来写。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const f &#x3D; () &#x3D;&gt; console.log(&#39;now&#39;);
+(async () &#x3D;&gt; f())();
+console.log(&#39;next&#39;);
+&#x2F;&#x2F; now
+&#x2F;&#x2F; next<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码中，第二行是一个立即执行的匿名函数，会立即执行里面的<code>async</code>函数，因此如果<code>f</code>是同步的，就会得到同步的结果；如果<code>f</code>是异步的，就可以用<code>then</code>指定下一步，就像下面的写法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">(async () &#x3D;&gt; f())()
+.then(...)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+
+<p>需要注意的是，<code>async () =&gt; f()</code>会吃掉<code>f()</code>抛出的错误。所以，如果想捕获错误，要使用<code>promise.catch</code>方法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">(async () &#x3D;&gt; f())()
+.then(...)
+.catch(...)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>第二种写法是使用<code>new Promise()</code>。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const f &#x3D; () &#x3D;&gt; console.log(&#39;now&#39;);
+(
+  () &#x3D;&gt; new Promise(
+    resolve &#x3D;&gt; resolve(f())
+  )
+)();
+console.log(&#39;next&#39;);
+&#x2F;&#x2F; now
+&#x2F;&#x2F; next<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码也是使用立即执行的匿名函数，执行<code>new Promise()</code>。这种情况下，同步函数也是同步执行的。</p>
+<p>鉴于这是一个很常见的需求，所以现在有一个<a target="_blank" rel="noopener" href="https://github.com/ljharb/proposal-promise-try">提案</a>，提供<code>Promise.try</code>方法替代上面的写法。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const f &#x3D; () &#x3D;&gt; console.log(&#39;now&#39;);
+Promise.try(f);
+console.log(&#39;next&#39;);
+&#x2F;&#x2F; now
+&#x2F;&#x2F; next<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>事实上，<code>Promise.try</code>存在已久，Promise 库<a target="_blank" rel="noopener" href="http://bluebirdjs.com/docs/api/promise.try.html"><code>Bluebird</code></a>、<a target="_blank" rel="noopener" href="https://github.com/kriskowal/q/wiki/API-Reference#promisefcallargs"><code>Q</code></a>和<a target="_blank" rel="noopener" href="https://github.com/cujojs/when/blob/master/docs/api.md#whentry"><code>when</code></a>，早就提供了这个方法。</p>
+<p>由于<code>Promise.try</code>为所有操作提供了统一的处理机制，所以如果想用<code>then</code>方法管理流程，最好都用<code>Promise.try</code>包装一下。这样有<a target="_blank" rel="noopener" href="http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/">许多好处</a>，其中一点就是可以更好地管理异常。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">function getUsername(userId) &#123;
+  return database.users.get(&#123;id: userId&#125;)
+  .then(function(user) &#123;
+    return user.name;
+  &#125;);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面代码中，<code>database.users.get()</code>返回一个 Promise 对象，如果抛出异步错误，可以用<code>catch</code>方法捕获，就像下面这样写。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">database.users.get(&#123;id: userId&#125;)
+.then(...)
+.catch(...)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>但是<code>database.users.get()</code>可能还会抛出同步错误（比如数据库连接错误，具体要看实现方法），这时你就不得不用<code>try...catch</code>去捕获。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">try &#123;
+  database.users.get(&#123;id: userId&#125;)
+  .then(...)
+  .catch(...)
+&#125; catch (e) &#123;
+  &#x2F;&#x2F; ...
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>上面这样的写法就很笨拙了，这时就可以统一用<code>promise.catch()</code>捕获所有同步和异步的错误。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Promise.try(() &#x3D;&gt; database.users.get(&#123;id: userId&#125;))
+  .then(...)
+  .catch(...)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>事实上，<code>Promise.try</code>就是模拟<code>try</code>代码块，就像<code>promise.catch</code>模拟的是<code>catch</code>代码块。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/JS/">JS</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2019/12/18/155/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">解决swiper高度自适应的问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2019/11/21/140/">
+                        <span class="hidden-mobile">JS循环遍历方法及区别</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/blog/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        豫ICP备18039751号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/debouncer.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/blog/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>
