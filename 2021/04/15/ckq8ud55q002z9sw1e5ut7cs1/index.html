@@ -18,7 +18,7 @@
   <meta name="author" content="Vir">
   <meta name="keywords" content="">
   
-  <title>hexo主题及配置GithubPage - Vir的博客</title>
+  <title>配置post存放位置 - Vir的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="hexo主题及配置GithubPage">
+            <span class="h2" id="subtitle" title="配置post存放位置">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-14 14:46" pubdate>
-        2021年4月14日 下午
+      <time datetime="2021-04-15 11:14" pubdate>
+        2021年4月15日 上午
       </time>
     </span>
   
@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      307 字
+      202 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      2
        分钟
     </span>
   
@@ -246,35 +246,25 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">hexo主题及配置GithubPage</h1>
+            <h1 style="display: none">配置post存放位置</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：10 分钟前
+                  本文最后更新于：20 天前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="hexo主题、简单配置及Github-Page配置"><a href="#hexo主题、简单配置及Github-Page配置" class="headerlink" title="hexo主题、简单配置及Github Page配置"></a>hexo主题、简单配置及Github Page配置</h1><h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>这里我选用Fluid主题</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> hexo-theme-fluid<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p>更多配置详细参考<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/">Fluid官方文档</a></p>
-<h3 id="Github-Page"><a href="#Github-Page" class="headerlink" title="Github Page"></a>Github Page</h3><p>首先在github新建一个仓库，我新建的名称为blog</p>
-<p>安装hexo-deployer-git</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> hexo-deployer-git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-
-<p>在_config.yml中添加以下配置</p>
-<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">deploy: 
-  type: git
-  repo: https:&#x2F;&#x2F;github.com&#x2F;&lt;username&gt;&#x2F;&lt;project&gt;
-  branch: gh-pages<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
-<p>主要需要关注repo和branch配置</p>
-<p>repo为 <code>https://github.com/virzs/virzs.github.io</code> 时branch需要指定为master分支，配置完成后地址为 <code>https://virzs.github.io/</code></p>
-<p>repo为 <code>https://github.com/virzs/blog</code> 时branch需要指定为gh-pages分支，配置完成后地址为 <code>https://virzs.github.io/blog/</code></p>
-<p><em>此处virzs为我的用户名，virzs.github.io和blog为仓库名</em></p>
-<p>执行 <code>hexo clean &amp;&amp; hexo deploy</code></p>
-<p><em>hexo clean命令会清除缓存文件和已生成的静态文件</em></p>
-<p><em>hexo deploy命令会部署网站</em></p>
-<p>打开<code>github</code>仓库<code>settings</code>，找到pages设置，设置<code>source</code>，如果仓库名为 <code>&lt;username&gt;.github.io</code> 类型，选择<code>master</code>分支 <code>/(root)</code> 文件夹。如果仓库名为 <code>&lt;repo&gt;</code> 类型，则选择<code>gh-pages</code>分支，文件夹同样设置为 <code>/(root)</code> 。点击<code>save</code>按钮 github会提示github page的链接。点击进入即可访问博客。</p>
+              <h1 id="hexo配置新建post的位置"><a href="#hexo配置新建post的位置" class="headerlink" title="hexo配置新建post的位置"></a>hexo配置新建post的位置</h1><p>使用 <code>hexo new post &lt;post_name&gt;</code> 新建文章时，会默认在 <code>_post</code> 文件夹下生成。这种做法虽然简单，但文章过多的话将不利于查看<br>因此需要修改默认的 <code>new_post_name</code> 实现功能</p>
+<p>打开 <code>_config.yml</code> 文件</p>
+<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>这是一个默认的配置，现在要实现以年月为路径存放文章，修改上面的配置</p>
+<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :year&#x2F;:month&#x2F;:title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>这样新建文章将会是这样的路径：<code>/_post/&lt;year&gt;/&lt;month&gt;/&lt;title&gt;.md</code></p>
+<p>当然 <code>new_post_name</code> 还可以配置生成的文章名，例如</p>
+<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :year-:month-:day-:title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>这样的话生成的文章名为 <code>&lt;year&gt;-&lt;month&gt;-&lt;day&gt;-&lt;title&gt;.md</code> 格式，例如 <code>2021-04-15-test.md</code></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">官方文档对new_post_name说明</a></p>
 
             </div>
             <hr>
@@ -302,9 +292,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2021/04/15/ckpg93zyz002u3ow17z82ctdv/">
+                      <a href="/blog/2021/04/16/ckq8ud55l002r9sw1gs5l496q/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">配置post存放位置</span>
+                        <span class="hidden-mobile">MaterialUI结合react-hook-form 1 (从一个简单的表单开始)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -312,8 +302,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2021/04/14/ckpg93zyx002t3ow1e435dwmd/">
-                        <span class="hidden-mobile">从wordpress迁移到hexo</span>
+                      <a href="/blog/2021/04/14/ckq8ud55o002w9sw11omv5yhz/">
+                        <span class="hidden-mobile">hexo主题及配置GithubPage</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -18,7 +18,7 @@
   <meta name="author" content="Vir">
   <meta name="keywords" content="">
   
-  <title>从wordpress迁移到hexo - Vir的博客</title>
+  <title>antd3中Select组件自定义suffixIcon下拉收起不旋转解决方案 - Vir的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="从wordpress迁移到hexo">
+            <span class="h2" id="subtitle" title="antd3中Select组件自定义suffixIcon下拉收起不旋转解决方案">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-14 13:47" pubdate>
-        2021年4月14日 下午
+      <time datetime="2021-06-23 09:55" pubdate>
+        2021年6月23日 上午
       </time>
     </span>
   
@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      127 字
+      233 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
@@ -246,19 +246,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">从wordpress迁移到hexo</h1>
+            <h1 style="display: none">antd3中Select组件自定义suffixIcon下拉收起不旋转解决方案</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：10 分钟前
+                  本文最后更新于：4 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="从wordpress迁移到hexo"><a href="#从wordpress迁移到hexo" class="headerlink" title="从wordpress迁移到hexo"></a>从wordpress迁移到hexo</h1><p>最近阿里云数据库到期，考虑到费用问题及日常使用频率，决定将博客换到hexo。</p>
-<p>此文章先测试下发布文章</p>
-<p>其实很早听说过hexo，而没有使用是因为hexo给我的感觉不像是一款产品，对使用有一定学习成本</p>
-<p>而放弃wordpress一方面因为数据库到期，另一方面是因为受到骚扰评论困扰，而且wordpress使用起来感觉过重</p>
+              <p>今天有个需求需要修改Select组件的arrow图标，经过查询文档得知可通过suffixIcon修改。</p>
+<blockquote>
+<p>注意showArrow的值为true</p>
+</blockquote>
+<p>如下代码，当我修改完成后，点击Select 图标却没有旋转。</p>
+<div class="code-wrapper"><pre class="line-numbers language-react" data-language="react"><code class="language-react">&lt;Select suffixIcon&#x3D;&#123;&lt;img src&#x3D;&quot;xxxx.png&quot; &#x2F;&gt;&#125; &#x2F;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>查找antd的Issues也没有得到有效的解决方法。</p>
+<p>干脆直接对比使用suffixIcon和默认情况下的不同。</p>
+<p>找到下面的样式</p>
+<div class="code-wrapper"><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.ant-select-open .ant-select-arrow-icon svg</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>180deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">-ms-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>180deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>180deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>自定义suffixIcon后并没有应用以上样式。其中 <code>ant-select-arrow-icon</code> 为一个i标签，内部是svg标签，而自定义的icon外部并没有包裹此标签。</p>
+<p>修改一下suffixIcon的内容并将img换为svg。</p>
+<div class="code-wrapper"><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Select</span>
+  <span class="token attr-name">suffixIcon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>&#123;</span>
+    <span class="token attr-name">&lt;i</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>anticon anticon-down ant-select-arrow-icon<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>svg内容<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">></span></span>
+  &#125;
+/><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>这样就可以正常实现功能了</p>
 
             </div>
             <hr>
@@ -268,7 +291,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/blog/categories/hexo%E4%BD%BF%E7%94%A8%E6%97%A5%E5%B8%B8/">hexo使用日常</a>
+                      <a class="hover-with-bg" href="/blog/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%8CAnt-Design/">解决方案，Ant Design</a>
                     
                   </div>
                 
@@ -286,18 +309,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2021/04/14/ckpg93zyv002q3ow1h4mo2hfn/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">hexo主题及配置GithubPage</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2021/02/01/341/">
-                        <span class="hidden-mobile">Antd React Form Instance created by `useForm` is not connected to any Form element. Forget to pass `form` prop 错误解决方案</span>
+                      <a href="/blog/2021/06/03/ckq8ud55r00329sw1b535e9i1/">
+                        <span class="hidden-mobile">umi中在单独的ts文件中使用国际化功能</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

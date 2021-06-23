@@ -18,7 +18,7 @@
   <meta name="author" content="Vir">
   <meta name="keywords" content="">
   
-  <title>配置post存放位置 - Vir的博客</title>
+  <title>从wordpress迁移到hexo - Vir的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="配置post存放位置">
+            <span class="h2" id="subtitle" title="从wordpress迁移到hexo">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-15 11:14" pubdate>
-        2021年4月15日 上午
+      <time datetime="2021-04-14 13:47" pubdate>
+        2021年4月14日 下午
       </time>
     </span>
   
@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      202 字
+      127 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      1
        分钟
     </span>
   
@@ -246,25 +246,19 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">配置post存放位置</h1>
+            <h1 style="display: none">从wordpress迁移到hexo</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：10 分钟前
+                  本文最后更新于：20 天前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="hexo配置新建post的位置"><a href="#hexo配置新建post的位置" class="headerlink" title="hexo配置新建post的位置"></a>hexo配置新建post的位置</h1><p>使用 <code>hexo new post &lt;post_name&gt;</code> 新建文章时，会默认在 <code>_post</code> 文件夹下生成。这种做法虽然简单，但文章过多的话将不利于查看<br>因此需要修改默认的 <code>new_post_name</code> 实现功能</p>
-<p>打开 <code>_config.yml</code> 文件</p>
-<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p>这是一个默认的配置，现在要实现以年月为路径存放文章，修改上面的配置</p>
-<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :year&#x2F;:month&#x2F;:title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p>这样新建文章将会是这样的路径：<code>/_post/&lt;year&gt;/&lt;month&gt;/&lt;title&gt;.md</code></p>
-<p>当然 <code>new_post_name</code> 还可以配置生成的文章名，例如</p>
-<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :year-:month-:day-:title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p>这样的话生成的文章名为 <code>&lt;year&gt;-&lt;month&gt;-&lt;day&gt;-&lt;title&gt;.md</code> 格式，例如 <code>2021-04-15-test.md</code></p>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">官方文档对new_post_name说明</a></p>
+              <h1 id="从wordpress迁移到hexo"><a href="#从wordpress迁移到hexo" class="headerlink" title="从wordpress迁移到hexo"></a>从wordpress迁移到hexo</h1><p>最近阿里云数据库到期，考虑到费用问题及日常使用频率，决定将博客换到hexo。</p>
+<p>此文章先测试下发布文章</p>
+<p>其实很早听说过hexo，而没有使用是因为hexo给我的感觉不像是一款产品，对使用有一定学习成本</p>
+<p>而放弃wordpress一方面因为数据库到期，另一方面是因为受到骚扰评论困扰，而且wordpress使用起来感觉过重</p>
 
             </div>
             <hr>
@@ -292,9 +286,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2021/04/16/ckpg93zyu002o3ow10r72a6k8/">
+                      <a href="/blog/2021/04/14/ckq8ud55o002w9sw11omv5yhz/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MaterialUI结合react-hook-form 1 (从一个简单的表单开始)</span>
+                        <span class="hidden-mobile">hexo主题及配置GithubPage</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -302,8 +296,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2021/04/14/ckpg93zyv002q3ow1h4mo2hfn/">
-                        <span class="hidden-mobile">hexo主题及配置GithubPage</span>
+                      <a href="/blog/2021/02/01/341/">
+                        <span class="hidden-mobile">Antd React Form Instance created by `useForm` is not connected to any Form element. Forget to pass `form` prop 错误解决方案</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
