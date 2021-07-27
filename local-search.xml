@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>mockjs导致arrayBuffer类型数据错误</title>
+    <link href="/blog/2021/07/27/ckrlinr4n0000vgw17s7vaho7/"/>
+    <url>/blog/2021/07/27/ckrlinr4n0000vgw17s7vaho7/</url>
+    
+    <content type="html"><![CDATA[<p>最近有个需求在网页中查看 CAD，引入 CAD SDK 后报错，但在 demo 项目中可以正常使用。</p><p>由于 SDK 是商用的，这里就不方便放出。</p><p>经过断点调试，输出 response 后发现，正式项目和 demo 项目返回的类型不一样。</p><p>正式项目为 <code>MockXMLHttpRequest</code>，而 demo项目为 <code>XMLHttpRequest</code>。</p><p>经过搜索，网上提到是 Mockjs 的问题。</p><p>下面是查找到的原因。</p><p><a href="https://segmentfault.com/a/1190000022746160">mockjs踩坑</a></p><p>mockjs原理：<br>在引入了Mock之后，mock.js内部会创建一个MockXMLHttpRequest来替代原生的XMLHttpRequest，如果有原生的XHR请求来，则拦截，替换成MockXMLHttpRequest对象，然后再匹配对应的url，如果没有，就发送网络请求。</p><p>FbxLoader是继承自Three.js的FileLoader对象，调用load方法时，会先判断传入的url是否是Base64格式的DataURI,如果是，则进行解析并返回，如果不是，就创建XHR请求。</p><p>到底是哪里出问题了呢？<br>调试到FbxLoader里，发现在load成功后，得到返回值是buffer，需要进行解析，responseType需要是’arrayBuffer’类型！问题来了，在mockjs的MockXMLHTTP中没有把responseType进行设置，而是设置成了空值，所以，无法解析出buffer对象。</p><p>查看正式项目后，发现几乎没有地方使用Mockjs，因此把Mockjs卸载后就可以正常加载 CAD 图纸了。</p><p>也有人提到 arrayBuffer 和 blob 类型的数据都会出现问题。</p><p>通过设置 Mockjs 而不是卸载来解决问题。</p><p>这个方法我没有测试，因此也不保证可用。</p><div class="code-wrapper"><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Mock<span class="token punctuation">.</span><span class="token class-name">XHR</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>proxy_open <span class="token operator">=</span> Mock<span class="token punctuation">.</span><span class="token class-name">XHR</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>open<span class="token punctuation">;</span>Mock<span class="token punctuation">.</span><span class="token class-name">XHR</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">open</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token keyword">let</span> responseType <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>responseType<span class="token punctuation">;</span>    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">proxy_open</span><span class="token punctuation">(</span><span class="token operator">...</span>arguments<span class="token punctuation">)</span>    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>custom<span class="token punctuation">.</span>xhr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        <span class="token keyword">if</span> <span class="token punctuation">(</span>responseType<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>            <span class="token keyword">this</span><span class="token punctuation">.</span>custom<span class="token punctuation">.</span>xhr<span class="token punctuation">.</span>responseType <span class="token operator">=</span> responseType        <span class="token punctuation">&#125;</span>    <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>解决方案</category>
+      
+      <category>网络请求</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>antd3中Select组件自定义suffixIcon下拉收起不旋转解决方案</title>
     <link href="/blog/2021/06/23/ckq8ud55q00309sw1cc61eurq/"/>
     <url>/blog/2021/06/23/ckq8ud55q00309sw1cc61eurq/</url>
