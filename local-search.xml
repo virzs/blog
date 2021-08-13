@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>点击任意区域取消textField的焦点</title>
+    <link href="/blog/2021/08/13/cks9p7d880000q0w1gg798ayy/"/>
+    <url>/blog/2021/08/13/cks9p7d880000q0w1gg798ayy/</url>
+    
+    <content type="html"><![CDATA[<h2 id="清除TextField焦点"><a href="#清除TextField焦点" class="headerlink" title="清除TextField焦点"></a>清除TextField焦点</h2><p>监听TextField焦点，如何在单击屏幕上的任意位置后隐藏软键盘？</p><div class="code-wrapper"><pre class="line-numbers language-dart" data-language="dart"><code class="language-dart"><span class="token comment">// 清除焦点</span>FocusScope<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">requestFocus</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FocusNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div><h2 id="在body中添加点击事件"><a href="#在body中添加点击事件" class="headerlink" title="在body中添加点击事件"></a>在body中添加点击事件</h2><div class="code-wrapper"><pre class="line-numbers language-dart" data-language="dart"><code class="language-dart"><span class="token function">Scaffold</span><span class="token punctuation">(</span>  body<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">GestureDetector</span><span class="token punctuation">(</span>    onTap<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        FocusScope<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">requestFocus</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FocusNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>    child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>      <span class="token comment">// 在此处添加内容</span>    <span class="token punctuation">)</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>flutter</category>
+      
+      <category>解决方案</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>mockjs导致arrayBuffer类型数据错误</title>
     <link href="/blog/2021/07/27/ckrlinr4n0000vgw17s7vaho7/"/>
     <url>/blog/2021/07/27/ckrlinr4n0000vgw17s7vaho7/</url>
