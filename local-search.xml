@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>Chrome浏览器本地跨域开发调试</title>
+    <link href="/blog/2021/08/19/cksiq8fpq0000p0w12q1mbv21/"/>
+    <url>/blog/2021/08/19/cksiq8fpq0000p0w12q1mbv21/</url>
+    
+    <content type="html"><![CDATA[<p>最近工作中碰到需要请求远程资源，跨域的问题。每次更改完需要打包项目推到服务器上测试实在是麻烦。</p><p>网上一搜刚好有浏览器关闭同源安全策略的方法。</p><ol><li>新建一个 chrome 的快捷方式</li><li>点击属性，找到目标</li><li>在目标值的最后加上 <code>--disable-web-security --user-data-dir=D:\chromedev</code> 代码</li><li>点击保存，双击此快捷方式打开</li></ol><p>当设置上述命令后，浏览器会提示稳定性和安全性会有所下降。推荐以新建快捷方式的方式设置。</p><p>其中 <code>--user-data-dir=</code> 后为本地文件夹路径，设置上述命令后浏览器会将部分数据保存到该文件夹。</p><p>理论上 Edge 浏览器也支持该设置。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>开发</tag>
+      
+      <tag>解决方案</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>点击任意区域取消textField的焦点</title>
     <link href="/blog/2021/08/13/cks9p7d880000q0w1gg798ayy/"/>
     <url>/blog/2021/08/13/cks9p7d880000q0w1gg798ayy/</url>
