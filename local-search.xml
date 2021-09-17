@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>TypeScript结合React常见类型总结</title>
+    <link href="/blog/2021/09/17/ckto6dv1h0000ncw1abvjbibg/"/>
+    <url>/blog/2021/09/17/ckto6dv1h0000ncw1abvjbibg/</url>
+    
+    <content type="html"><![CDATA[<ol><li><p><code>React.FC&lt;P&gt;</code> / <code>React.FunctionCopmonent&lt;P&gt;</code><br><code>React</code> 函数式组件的泛型接口，一般使用简写 <code>FC</code>，可以接受一个参数 <code>P</code>，用来定义 <code>props</code> 的类型。</p></li><li><p><code>React.Component&lt;P, S&gt;</code> / <code>React.PureComponent&lt;P, S&gt;</code><br><code>React</code> 类组件的泛型接口，接受两个参数，第一个是 <code>props</code> 的类型定义，第二个是 <code>state</code> 的类型定义。</p></li><li><p><code>React.ReactElement</code><br>使用React.createElement创建的，可以简单理解为React中的JSX的元素。</p></li><li><p><code>JSX.Element</code><br>return返回的jsx语法类型。</p></li><li><p><code>React.ReactNode</code><br><code>&lt;div&gt;node&lt;/div&gt;</code> node的合法类型。</p></li><li><p><code>FormEvent</code><br><code>form</code> 表单的 <code>event</code> 类型。</p></li><li><p><code>ChangeEvent&lt;e&gt;</code><br><code>onChange</code> 事件触发的 <code>event</code> 泛型接口，可选 <code>HTMLSelectElement</code>、<code>HTMLInputElement</code> 等 <code>html</code> 标签节点类型。</p></li><li><p><code>RouteComponentProps</code></p></li><li><p><code>react-router</code> 中组件的类型接口，包含 <code>history</code> 等路由数据。</p></li></ol><p>其他想到时再补充</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Chrome浏览器本地跨域开发调试</title>
     <link href="/blog/2021/08/19/cksiq8fpq0000p0w12q1mbv21/"/>
     <url>/blog/2021/08/19/cksiq8fpq0000p0w12q1mbv21/</url>
