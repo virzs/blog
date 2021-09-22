@@ -18,7 +18,7 @@
   <meta name="author" content="Vir">
   <meta name="keywords" content="">
   
-  <title>hexo主题及配置GithubPage - Vir的博客</title>
+  <title>TypeScript结合React常见类型总结 - Vir的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="hexo主题及配置GithubPage">
+            <span class="h2" id="subtitle" title="TypeScript结合React常见类型总结">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-14 14:46" pubdate>
-        2021年4月14日 下午
+      <time datetime="2021-09-17 10:09" pubdate>
+        2021年9月17日 上午
       </time>
     </span>
   
@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      307 字
+      198 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      2
        分钟
     </span>
   
@@ -246,47 +246,41 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">hexo主题及配置GithubPage</h1>
+            <h1 style="display: none">TypeScript结合React常见类型总结</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 个月前
+                  本文最后更新于：5 天前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="hexo主题、简单配置及Github-Page配置"><a href="#hexo主题、简单配置及Github-Page配置" class="headerlink" title="hexo主题、简单配置及Github Page配置"></a>hexo主题、简单配置及Github Page配置</h1><h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>这里我选用Fluid主题</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> hexo-theme-fluid<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p>更多配置详细参考<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/">Fluid官方文档</a></p>
-<h3 id="Github-Page"><a href="#Github-Page" class="headerlink" title="Github Page"></a>Github Page</h3><p>首先在github新建一个仓库，我新建的名称为blog</p>
-<p>安装hexo-deployer-git</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> hexo-deployer-git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-
-<p>在_config.yml中添加以下配置</p>
-<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">deploy: 
-  type: git
-  repo: https:&#x2F;&#x2F;github.com&#x2F;&lt;username&gt;&#x2F;&lt;project&gt;
-  branch: gh-pages<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
-<p>主要需要关注repo和branch配置</p>
-<p>repo为 <code>https://github.com/virzs/virzs.github.io</code> 时branch需要指定为master分支，配置完成后地址为 <code>https://virzs.github.io/</code></p>
-<p>repo为 <code>https://github.com/virzs/blog</code> 时branch需要指定为gh-pages分支，配置完成后地址为 <code>https://virzs.github.io/blog/</code></p>
-<p><em>此处virzs为我的用户名，virzs.github.io和blog为仓库名</em></p>
-<p>执行 <code>hexo clean &amp;&amp; hexo deploy</code></p>
-<p><em>hexo clean命令会清除缓存文件和已生成的静态文件</em></p>
-<p><em>hexo deploy命令会部署网站</em></p>
-<p>打开<code>github</code>仓库<code>settings</code>，找到pages设置，设置<code>source</code>，如果仓库名为 <code>&lt;username&gt;.github.io</code> 类型，选择<code>master</code>分支 <code>/(root)</code> 文件夹。如果仓库名为 <code>&lt;repo&gt;</code> 类型，则选择<code>gh-pages</code>分支，文件夹同样设置为 <code>/(root)</code> 。点击<code>save</code>按钮 github会提示github page的链接。点击进入即可访问博客。</p>
+              <ol>
+<li><p><code>React.FC&lt;P&gt;</code> / <code>React.FunctionCopmonent&lt;P&gt;</code><br><code>React</code> 函数式组件的泛型接口，一般使用简写 <code>FC</code>，可以接受一个参数 <code>P</code>，用来定义 <code>props</code> 的类型。</p>
+</li>
+<li><p><code>React.Component&lt;P, S&gt;</code> / <code>React.PureComponent&lt;P, S&gt;</code><br><code>React</code> 类组件的泛型接口，接受两个参数，第一个是 <code>props</code> 的类型定义，第二个是 <code>state</code> 的类型定义。</p>
+</li>
+<li><p><code>React.ReactElement</code><br>使用React.createElement创建的，可以简单理解为React中的JSX的元素。</p>
+</li>
+<li><p><code>JSX.Element</code><br>return返回的jsx语法类型。</p>
+</li>
+<li><p><code>React.ReactNode</code><br><code>&lt;div&gt;node&lt;/div&gt;</code> node的合法类型。</p>
+</li>
+<li><p><code>FormEvent</code><br><code>form</code> 表单的 <code>event</code> 类型。</p>
+</li>
+<li><p><code>ChangeEvent&lt;e&gt;</code><br><code>onChange</code> 事件触发的 <code>event</code> 泛型接口，可选 <code>HTMLSelectElement</code>、<code>HTMLInputElement</code> 等 <code>html</code> 标签节点类型。</p>
+</li>
+<li><p><code>RouteComponentProps</code></p>
+</li>
+<li><p><code>react-router</code> 中组件的类型接口，包含 <code>history</code> 等路由数据。</p>
+</li>
+</ol>
+<p>其他想到时再补充</p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/blog/categories/hexo%E4%BD%BF%E7%94%A8%E6%97%A5%E5%B8%B8/">hexo使用日常</a>
-                    
-                  </div>
                 
                 
               </div>
@@ -302,9 +296,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2021/04/15/ckq8ud55q002z9sw1e5ut7cs1/">
+                      <a href="/blog/2021/09/22/cktv98bsb005agsw16ovl307q/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">配置post存放位置</span>
+                        <span class="hidden-mobile">前端项目部署githubPage</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -312,8 +306,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2021/04/14/ckq8ud55o002x9sw148ak9nbb/">
-                        <span class="hidden-mobile">从wordpress迁移到hexo</span>
+                      <a href="/blog/2021/08/19/cktv98brw004zgsw17sgc723q/">
+                        <span class="hidden-mobile">Chrome浏览器本地跨域开发调试</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

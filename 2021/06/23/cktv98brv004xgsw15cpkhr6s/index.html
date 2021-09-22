@@ -18,7 +18,7 @@
   <meta name="author" content="Vir">
   <meta name="keywords" content="">
   
-  <title>mockjs导致arrayBuffer类型数据错误 - Vir的博客</title>
+  <title>antd3中Select组件自定义suffixIcon下拉收起不旋转解决方案 - Vir的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="mockjs导致arrayBuffer类型数据错误">
+            <span class="h2" id="subtitle" title="antd3中Select组件自定义suffixIcon下拉收起不旋转解决方案">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-27 11:36" pubdate>
-        2021年7月27日 中午
+      <time datetime="2021-06-23 09:55" pubdate>
+        2021年6月23日 上午
       </time>
     </span>
   
@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      425 字
+      233 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      3
        分钟
     </span>
   
@@ -246,39 +246,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">mockjs导致arrayBuffer类型数据错误</h1>
+            <h1 style="display: none">antd3中Select组件自定义suffixIcon下拉收起不旋转解决方案</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 个月前
+                  本文最后更新于：3 个月前
                 
               </p>
             
             <div class="markdown-body">
-              <p>最近有个需求在网页中查看 CAD，引入 CAD SDK 后报错，但在 demo 项目中可以正常使用。</p>
-<p>由于 SDK 是商用的，这里就不方便放出。</p>
-<p>经过断点调试，输出 response 后发现，正式项目和 demo 项目返回的类型不一样。</p>
-<p>正式项目为 <code>MockXMLHttpRequest</code>，而 demo项目为 <code>XMLHttpRequest</code>。</p>
-<p>经过搜索，网上提到是 Mockjs 的问题。</p>
-<p>下面是查找到的原因。</p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022746160">mockjs踩坑</a></p>
-<p>mockjs原理：<br>在引入了Mock之后，mock.js内部会创建一个MockXMLHttpRequest来替代原生的XMLHttpRequest，如果有原生的XHR请求来，则拦截，替换成MockXMLHttpRequest对象，然后再匹配对应的url，如果没有，就发送网络请求。</p>
-<p>FbxLoader是继承自Three.js的FileLoader对象，调用load方法时，会先判断传入的url是否是Base64格式的DataURI,如果是，则进行解析并返回，如果不是，就创建XHR请求。</p>
-<p>到底是哪里出问题了呢？<br>调试到FbxLoader里，发现在load成功后，得到返回值是buffer，需要进行解析，responseType需要是’arrayBuffer’类型！问题来了，在mockjs的MockXMLHTTP中没有把responseType进行设置，而是设置成了空值，所以，无法解析出buffer对象。</p>
-<p>查看正式项目后，发现几乎没有地方使用Mockjs，因此把Mockjs卸载后就可以正常加载 CAD 图纸了。</p>
-<p>也有人提到 arrayBuffer 和 blob 类型的数据都会出现问题。</p>
-<p>通过设置 Mockjs 而不是卸载来解决问题。</p>
-<p>这个方法我没有测试，因此也不保证可用。</p>
-<div class="code-wrapper"><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Mock<span class="token punctuation">.</span><span class="token class-name">XHR</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>proxy_open <span class="token operator">=</span> Mock<span class="token punctuation">.</span><span class="token class-name">XHR</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>open<span class="token punctuation">;</span>
-Mock<span class="token punctuation">.</span><span class="token class-name">XHR</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">open</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">let</span> responseType <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>responseType<span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">proxy_open</span><span class="token punctuation">(</span><span class="token operator">...</span>arguments<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>custom<span class="token punctuation">.</span>xhr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>responseType<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">this</span><span class="token punctuation">.</span>custom<span class="token punctuation">.</span>xhr<span class="token punctuation">.</span>responseType <span class="token operator">=</span> responseType
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+              <p>今天有个需求需要修改Select组件的arrow图标，经过查询文档得知可通过suffixIcon修改。</p>
+<blockquote>
+<p>注意showArrow的值为true</p>
+</blockquote>
+<p>如下代码，当我修改完成后，点击Select 图标却没有旋转。</p>
+<div class="code-wrapper"><pre class="line-numbers language-react" data-language="react"><code class="language-react">&lt;Select suffixIcon&#x3D;&#123;&lt;img src&#x3D;&quot;xxxx.png&quot; &#x2F;&gt;&#125; &#x2F;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>查找antd的Issues也没有得到有效的解决方法。</p>
+<p>干脆直接对比使用suffixIcon和默认情况下的不同。</p>
+<p>找到下面的样式</p>
+<div class="code-wrapper"><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.ant-select-open .ant-select-arrow-icon svg</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>180deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">-ms-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>180deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>180deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>自定义suffixIcon后并没有应用以上样式。其中 <code>ant-select-arrow-icon</code> 为一个i标签，内部是svg标签，而自定义的icon外部并没有包裹此标签。</p>
+<p>修改一下suffixIcon的内容并将img换为svg。</p>
+<div class="code-wrapper"><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Select</span>
+  <span class="token attr-name">suffixIcon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>&#123;</span>
+    <span class="token attr-name">&lt;i</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>anticon anticon-down ant-select-arrow-icon<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>svg内容<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">></span></span>
+  &#125;
+/><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p>这样就可以正常实现功能了</p>
 
             </div>
             <hr>
@@ -288,9 +291,7 @@ Mock<span class="token punctuation">.</span><span class="token class-name">XHR</
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/blog/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">解决方案</a>
-                    
-                      <a class="hover-with-bg" href="/blog/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/">网络请求</a>
+                      <a class="hover-with-bg" href="/blog/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%8CAnt-Design/">解决方案，Ant Design</a>
                     
                   </div>
                 
@@ -308,9 +309,9 @@ Mock<span class="token punctuation">.</span><span class="token class-name">XHR</
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2021/08/13/cks9p7d880000q0w1gg798ayy/">
+                      <a href="/blog/2021/07/27/cktv98bs60052gsw19vqxhu8z/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">点击任意区域取消textField的焦点</span>
+                        <span class="hidden-mobile">mockjs导致arrayBuffer类型数据错误</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -318,8 +319,8 @@ Mock<span class="token punctuation">.</span><span class="token class-name">XHR</
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2021/06/23/ckq8ud55q00309sw1cc61eurq/">
-                        <span class="hidden-mobile">antd3中Select组件自定义suffixIcon下拉收起不旋转解决方案</span>
+                      <a href="/blog/2021/06/03/cktv98bru004ugsw12qam5wlx/">
+                        <span class="hidden-mobile">umi中在单独的ts文件中使用国际化功能</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

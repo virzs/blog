@@ -18,7 +18,7 @@
   <meta name="author" content="Vir">
   <meta name="keywords" content="">
   
-  <title>hexo多级分类和并列分类设置 - Vir的博客</title>
+  <title>hexo主题及配置GithubPage - Vir的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="hexo多级分类和并列分类设置">
+            <span class="h2" id="subtitle" title="hexo主题及配置GithubPage">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-17 00:19" pubdate>
-        2021年4月17日 凌晨
+      <time datetime="2021-04-14 14:46" pubdate>
+        2021年4月14日 下午
       </time>
     </span>
   
@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      131 字
+      307 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      4
        分钟
     </span>
   
@@ -246,41 +246,35 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">hexo多级分类和并列分类设置</h1>
+            <h1 style="display: none">hexo主题及配置GithubPage</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 个月前
+                  本文最后更新于：4 个月前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="hexo文章分类设置"><a href="#hexo文章分类设置" class="headerlink" title="hexo文章分类设置"></a>hexo文章分类设置</h1><p>hexo中提供了 <code>categories</code> 分类设置，但官方文档对于此处的写法说明比较模糊</p>
-<p>普通分类设置:</p>
-<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories: category<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+              <h1 id="hexo主题、简单配置及Github-Page配置"><a href="#hexo主题、简单配置及Github-Page配置" class="headerlink" title="hexo主题、简单配置及Github Page配置"></a>hexo主题、简单配置及Github Page配置</h1><h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>这里我选用Fluid主题</p>
+<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> hexo-theme-fluid<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>更多配置详细参考<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/">Fluid官方文档</a></p>
+<h3 id="Github-Page"><a href="#Github-Page" class="headerlink" title="Github Page"></a>Github Page</h3><p>首先在github新建一个仓库，我新建的名称为blog</p>
+<p>安装hexo-deployer-git</p>
+<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> hexo-deployer-git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
-<p>多层分类设置：</p>
-<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories: [parent, children]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-
-<p>并列分类设置:</p>
-<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories:
-<span class="token list punctuation">-</span> parent
-<span class="token list punctuation">-</span> parent<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
-
-<p>并列分类及多层分类同时使用:</p>
-<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories:
-<span class="token list punctuation">-</span> [parent, children]
-<span class="token list punctuation">-</span> [parent, children]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
-
-<p>也可以这样:</p>
-<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories:
-<span class="token list punctuation">-</span> category
-<span class="token list punctuation">-</span> [parent, children]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
-
-<p>以上的写法基本上可以覆盖日常写作需求</p>
-<p>还可以这样写:</p>
-<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories: [[parent, children], [parent, children]]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p>这种写法和并列+多层分类效果相同</p>
+<p>在_config.yml中添加以下配置</p>
+<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">deploy: 
+  type: git
+  repo: https:&#x2F;&#x2F;github.com&#x2F;&lt;username&gt;&#x2F;&lt;project&gt;
+  branch: gh-pages<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>主要需要关注repo和branch配置</p>
+<p>repo为 <code>https://github.com/virzs/virzs.github.io</code> 时branch需要指定为master分支，配置完成后地址为 <code>https://virzs.github.io/</code></p>
+<p>repo为 <code>https://github.com/virzs/blog</code> 时branch需要指定为gh-pages分支，配置完成后地址为 <code>https://virzs.github.io/blog/</code></p>
+<p><em>此处virzs为我的用户名，virzs.github.io和blog为仓库名</em></p>
+<p>执行 <code>hexo clean &amp;&amp; hexo deploy</code></p>
+<p><em>hexo clean命令会清除缓存文件和已生成的静态文件</em></p>
+<p><em>hexo deploy命令会部署网站</em></p>
+<p>打开<code>github</code>仓库<code>settings</code>，找到pages设置，设置<code>source</code>，如果仓库名为 <code>&lt;username&gt;.github.io</code> 类型，选择<code>master</code>分支 <code>/(root)</code> 文件夹。如果仓库名为 <code>&lt;repo&gt;</code> 类型，则选择<code>gh-pages</code>分支，文件夹同样设置为 <code>/(root)</code> 。点击<code>save</code>按钮 github会提示github page的链接。点击进入即可访问博客。</p>
 
             </div>
             <hr>
@@ -308,9 +302,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2021/04/23/ckq8ud55m002t9sw13xx6dvb8/">
+                      <a href="/blog/2021/04/15/cktv98brt004sgsw19umu84eh/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MaterialUI封装全局Snackbar组件</span>
+                        <span class="hidden-mobile">配置post存放位置</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -318,8 +312,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2021/04/16/ckq8ud55l002r9sw1gs5l496q/">
-                        <span class="hidden-mobile">MaterialUI结合react-hook-form 1 (从一个简单的表单开始)</span>
+                      <a href="/blog/2021/04/14/cktv98brr004qgsw13b21e4re/">
+                        <span class="hidden-mobile">从wordpress迁移到hexo</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

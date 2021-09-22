@@ -182,6 +182,61 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/blog/2020/08/09/304/">TypeScript引入第三方模块提示无法找到该模块的声明文件解决方案</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/blog/2020/08/09/304/">
+          
+          
+            
+          
+          一
+安装该模块的typeScript版本
+@types/xxxx
+
+二
+项目根目录新建types文件夹
+在tsconfig.json中include处添加types
+在types文件夹中新建声明文件
+declare module &#39;XXX&#39; &#123;
+  const content: any
+  export &#x3D; content
+&#125;
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-09 18:09" pubdate>
+              2020-08-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/blog/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">解决方案</a>
+            
+              <a href="/blog/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/TypeScript/">TypeScript</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/blog/2020/06/11/292/">React笔记五：使用state</a>
       </h1>
 
@@ -596,50 +651,6 @@ Scoped CSS规范是Web组件产生不污染其他组件，也不被其他组件�
               <a href="/blog/categories/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/">代码片段</a>
             
               <a href="/blog/categories/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2020/02/15/243/">关于将es6 mjs格式模块放在服务器端无法被请求的解决方案</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/blog/2020/02/15/243/">
-          
-          
-            
-          
-          将mjs文件更改为js文件，mjs文件在服务器端可能无法识别
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-02-15 16:20" pubdate>
-              2020-02-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/blog/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">解决方案</a>
-            
-              <a href="/blog/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/JavaScript/">JavaScript</a>
             
           </div>
         

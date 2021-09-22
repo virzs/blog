@@ -18,7 +18,7 @@
   <meta name="author" content="Vir">
   <meta name="keywords" content="">
   
-  <title>点击任意区域取消textField的焦点 - Vir的博客</title>
+  <title>配置post存放位置 - Vir的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="点击任意区域取消textField的焦点">
+            <span class="h2" id="subtitle" title="配置post存放位置">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-13 09:50" pubdate>
-        2021年8月13日 上午
+      <time datetime="2021-04-15 11:14" pubdate>
+        2021年4月15日 上午
       </time>
     </span>
   
@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      69 字
+      202 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分钟
     </span>
   
@@ -246,28 +246,25 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">点击任意区域取消textField的焦点</h1>
+            <h1 style="display: none">配置post存放位置</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：4 个月前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="清除TextField焦点"><a href="#清除TextField焦点" class="headerlink" title="清除TextField焦点"></a>清除TextField焦点</h2><p>监听TextField焦点，如何在单击屏幕上的任意位置后隐藏软键盘？</p>
-<div class="code-wrapper"><pre class="line-numbers language-dart" data-language="dart"><code class="language-dart"><span class="token comment">// 清除焦点</span>
-FocusScope<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">requestFocus</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FocusNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
-
-<h2 id="在body中添加点击事件"><a href="#在body中添加点击事件" class="headerlink" title="在body中添加点击事件"></a>在body中添加点击事件</h2><div class="code-wrapper"><pre class="line-numbers language-dart" data-language="dart"><code class="language-dart"><span class="token function">Scaffold</span><span class="token punctuation">(</span>
-  body<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">GestureDetector</span><span class="token punctuation">(</span>
-    onTap<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        FocusScope<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">requestFocus</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FocusNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
-      <span class="token comment">// 在此处添加内容</span>
-    <span class="token punctuation">)</span>
- <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+              <h1 id="hexo配置新建post的位置"><a href="#hexo配置新建post的位置" class="headerlink" title="hexo配置新建post的位置"></a>hexo配置新建post的位置</h1><p>使用 <code>hexo new post &lt;post_name&gt;</code> 新建文章时，会默认在 <code>_post</code> 文件夹下生成。这种做法虽然简单，但文章过多的话将不利于查看<br>因此需要修改默认的 <code>new_post_name</code> 实现功能</p>
+<p>打开 <code>_config.yml</code> 文件</p>
+<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>这是一个默认的配置，现在要实现以年月为路径存放文章，修改上面的配置</p>
+<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :year&#x2F;:month&#x2F;:title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>这样新建文章将会是这样的路径：<code>/_post/&lt;year&gt;/&lt;month&gt;/&lt;title&gt;.md</code></p>
+<p>当然 <code>new_post_name</code> 还可以配置生成的文章名，例如</p>
+<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :year-:month-:day-:title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>这样的话生成的文章名为 <code>&lt;year&gt;-&lt;month&gt;-&lt;day&gt;-&lt;title&gt;.md</code> 格式，例如 <code>2021-04-15-test.md</code></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">官方文档对new_post_name说明</a></p>
 
             </div>
             <hr>
@@ -277,9 +274,7 @@ FocusScope<span class="token punctuation">.</span><span class="token function">o
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/blog/categories/flutter/">flutter</a>
-                    
-                      <a class="hover-with-bg" href="/blog/categories/flutter/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">解决方案</a>
+                      <a class="hover-with-bg" href="/blog/categories/hexo%E4%BD%BF%E7%94%A8%E6%97%A5%E5%B8%B8/">hexo使用日常</a>
                     
                   </div>
                 
@@ -297,9 +292,9 @@ FocusScope<span class="token punctuation">.</span><span class="token function">o
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2021/08/19/cksiq8fpq0000p0w12q1mbv21/">
+                      <a href="/blog/2021/04/16/cktv98brh004igsw1alok1xt5/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Chrome浏览器本地跨域开发调试</span>
+                        <span class="hidden-mobile">MaterialUI结合react-hook-form 1 (从一个简单的表单开始)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -307,8 +302,8 @@ FocusScope<span class="token punctuation">.</span><span class="token function">o
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2021/07/27/ckrlinr4n0000vgw17s7vaho7/">
-                        <span class="hidden-mobile">mockjs导致arrayBuffer类型数据错误</span>
+                      <a href="/blog/2021/04/14/cktv98brm004ngsw1hv37b7se/">
+                        <span class="hidden-mobile">hexo主题及配置GithubPage</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

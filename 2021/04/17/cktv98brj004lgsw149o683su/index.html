@@ -18,7 +18,7 @@
   <meta name="author" content="Vir">
   <meta name="keywords" content="">
   
-  <title>配置post存放位置 - Vir的博客</title>
+  <title>hexo多级分类和并列分类设置 - Vir的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="配置post存放位置">
+            <span class="h2" id="subtitle" title="hexo多级分类和并列分类设置">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-15 11:14" pubdate>
-        2021年4月15日 上午
+      <time datetime="2021-04-17 00:19" pubdate>
+        2021年4月17日 凌晨
       </time>
     </span>
   
@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      202 字
+      131 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      1
        分钟
     </span>
   
@@ -246,25 +246,41 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">配置post存放位置</h1>
+            <h1 style="display: none">hexo多级分类和并列分类设置</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 个月前
+                  本文最后更新于：4 个月前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="hexo配置新建post的位置"><a href="#hexo配置新建post的位置" class="headerlink" title="hexo配置新建post的位置"></a>hexo配置新建post的位置</h1><p>使用 <code>hexo new post &lt;post_name&gt;</code> 新建文章时，会默认在 <code>_post</code> 文件夹下生成。这种做法虽然简单，但文章过多的话将不利于查看<br>因此需要修改默认的 <code>new_post_name</code> 实现功能</p>
-<p>打开 <code>_config.yml</code> 文件</p>
-<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p>这是一个默认的配置，现在要实现以年月为路径存放文章，修改上面的配置</p>
-<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :year&#x2F;:month&#x2F;:title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p>这样新建文章将会是这样的路径：<code>/_post/&lt;year&gt;/&lt;month&gt;/&lt;title&gt;.md</code></p>
-<p>当然 <code>new_post_name</code> 还可以配置生成的文章名，例如</p>
-<div class="code-wrapper"><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">new_post_name: :year-:month-:day-:title.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p>这样的话生成的文章名为 <code>&lt;year&gt;-&lt;month&gt;-&lt;day&gt;-&lt;title&gt;.md</code> 格式，例如 <code>2021-04-15-test.md</code></p>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">官方文档对new_post_name说明</a></p>
+              <h1 id="hexo文章分类设置"><a href="#hexo文章分类设置" class="headerlink" title="hexo文章分类设置"></a>hexo文章分类设置</h1><p>hexo中提供了 <code>categories</code> 分类设置，但官方文档对于此处的写法说明比较模糊</p>
+<p>普通分类设置:</p>
+<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories: category<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>多层分类设置：</p>
+<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories: [parent, children]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>并列分类设置:</p>
+<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories:
+<span class="token list punctuation">-</span> parent
+<span class="token list punctuation">-</span> parent<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>并列分类及多层分类同时使用:</p>
+<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories:
+<span class="token list punctuation">-</span> [parent, children]
+<span class="token list punctuation">-</span> [parent, children]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>也可以这样:</p>
+<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories:
+<span class="token list punctuation">-</span> category
+<span class="token list punctuation">-</span> [parent, children]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p>以上的写法基本上可以覆盖日常写作需求</p>
+<p>还可以这样写:</p>
+<div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories: [[parent, children], [parent, children]]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>这种写法和并列+多层分类效果相同</p>
 
             </div>
             <hr>
@@ -292,9 +308,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2021/04/16/ckq8ud55l002r9sw1gs5l496q/">
+                      <a href="/blog/2021/04/23/cktv98brf004ggsw1gzr34s29/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MaterialUI结合react-hook-form 1 (从一个简单的表单开始)</span>
+                        <span class="hidden-mobile">MaterialUI封装全局Snackbar组件</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -302,8 +318,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2021/04/14/ckq8ud55o002w9sw11omv5yhz/">
-                        <span class="hidden-mobile">hexo主题及配置GithubPage</span>
+                      <a href="/blog/2021/04/16/cktv98brh004igsw1alok1xt5/">
+                        <span class="hidden-mobile">MaterialUI结合react-hook-form 1 (从一个简单的表单开始)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
