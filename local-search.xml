@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>flutter pub get failed 66的解决方法</title>
+    <link href="/blog/2021/10/25/ckvdaehtf0000nsw10hsa04du/"/>
+    <url>/blog/2021/10/25/ckvdaehtf0000nsw10hsa04du/</url>
+    
+    <content type="html"><![CDATA[<p>flutter 运行 <code>flutter pub get</code> 提示下面错误</p><p><code>Could not decompress gz stream Connection closed while receiving data, path = &#39;&#39;</code></p><p>解决方法</p><p>先执行 <code>flutter clean</code> 然后重新 运行 <code>flutter pub get</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>flutter</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>前端项目部署githubPage</title>
     <link href="/blog/2021/09/22/cktv98bsb005agsw16ovl307q/"/>
     <url>/blog/2021/09/22/cktv98bsb005agsw16ovl307q/</url>
